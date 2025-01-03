@@ -66,4 +66,14 @@ public class UserController {
     return userService.deleteUser(username);
   }
 
+  @PostMapping("/login")
+  public ResponseEntity<String> login(@RequestBody User user) {
+    return userService.verify(user);
+    // return "Success";
+  }
+
+  @PostMapping("/register")
+  public User register(@RequestBody User user) {
+    return user;
+  }
 }

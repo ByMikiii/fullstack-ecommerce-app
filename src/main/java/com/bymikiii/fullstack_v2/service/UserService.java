@@ -5,8 +5,13 @@
 package com.bymikiii.fullstack_v2.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bymikiii.fullstack_v2.exception.UserExistsException;
@@ -16,8 +21,17 @@ import com.bymikiii.fullstack_v2.repository.*;
 
 @Service
 public class UserService {
+
   @Autowired
   private UserRepository userRepository;
+
+  @Autowired
+  AuthenticationManager authenticationManager;
+
+  @Autowired
+  JwtService jwtService;
+
+  private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
 
   public List<User> getAllUsers() {
     return userRepository.findAll();
@@ -28,6 +42,7 @@ public class UserService {
     if (foundUser != null) {
       throw new UserExistsException("User " + user.getUsername() + " already exists");
     }
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
     userRepository.save(user);
   }
 
@@ -46,7 +61,7 @@ public class UserService {
     } else {
       foundUser.setUsername(updatedUser.getUsername());
       foundUser.setEmail(updatedUser.getEmail());
-      foundUser.setPassword(updatedUser.getPassword());
+      foundUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
       foundUser.setFirstName(updatedUser.getFirstName());
       foundUser.setLastName(updatedUser.getLastName());
 
@@ -62,6 +77,22 @@ public class UserService {
     } else {
       userRepository.delete(foundUser);
       return ResponseEntity.ok("User deleted");
+    }
+  }
+
+  public ResponseEntity<String> verify(User user) {
+    try {
+      System.out.println(passwordEncoder.encode(user.getPassword()));
+      System.out.println(user.getPassword());
+      Authentication authentication = authenticationManager
+          .authenticate(
+              new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+      if (authentication.isAuthenticated()) {
+        return ResponseEntity.ok(jwtService.generateToken(user.getUsername()));
+      }
+      return ResponseEntity.status(401).body("Not Authenticated");
+    } catch (Exception e) {
+      return ResponseEntity.status(401).body("Not Authenticated, exception: " + e.getMessage());
     }
   }
 }
