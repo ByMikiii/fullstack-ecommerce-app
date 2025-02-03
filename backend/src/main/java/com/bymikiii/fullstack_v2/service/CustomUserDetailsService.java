@@ -1,7 +1,3 @@
-/*
- * Author: ByMikiii
- * Created Date: Tuesday December 31st 2024
- */
 package com.bymikiii.fullstack_v2.service;
 
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,12 +1,8 @@
 import React, { createContext, useEffect, useState } from "react";
-import { useContext } from "react";
 import Cookies from "js-cookie";
-import User from "./features/User";
+import Home from "./pages/home/Home.js";
 import Login from "./features/auth/Login";
 import Register from "./features/auth/Register";
-import SignBanner from "./components/SignBanner";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 export const AuthContext = createContext();
@@ -30,11 +26,8 @@ const App = () => {
   return (
     <AuthContext.Provider value={[loggedIn, setLoggedIn]}>
       <Router>
-        <SignBanner />
-        <Header />
-        <Footer />
         <Routes>
-          {/* <Route path="/" element={<Home />} /> */}
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>

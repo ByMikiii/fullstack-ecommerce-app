@@ -1,8 +1,3 @@
-/*
- * Author: ByMikiii
- * Created Date: Thursday December 19th 2024
- */
-
 package com.bymikiii.fullstack_v2.model;
 
 import org.bson.types.ObjectId;

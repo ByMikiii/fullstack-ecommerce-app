@@ -13,9 +13,11 @@ target/
 .sts4-cache
 
 .idea
+.vscode/
 *.iws
 *.iml
 *.ipr
+*.log
 
 /nbproject/private/
 /nbbuild/
@@ -27,4 +29,7 @@ build/
 !**/src/test/**/build/
 .mvn/
 
-.vscode/
+package-lock.json
+yarn.lock
+tailwind.css
+node_modules/
