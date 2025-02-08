@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import Home from "./pages/home/Home.js";
+import Store from "./pages/store/Store.js";
 import Login from "./features/auth/Login";
 import Register from "./features/auth/Register";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
@@ -28,6 +29,7 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/store" element={<Store />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>

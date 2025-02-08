@@ -1,11 +1,13 @@
 import React from "react";
 
-const Button = ({ text, className }) => {
+const Button = ({ text, className, onClick }) => {
   return (
     <button
-      class={`w-[210px] h-[52px] rounded-[62px] font-medium ${className}`}
+      class={`h-[52px] rounded-[62px] font-medium ${className}`}
+      onClick={onClick}
+      id={text}
     >
-      <a href="">{text}</a>
+      {text}
     </button>
   );
 };

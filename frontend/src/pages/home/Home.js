@@ -27,17 +27,17 @@ const Home = () => {
           designed to bring out your individuality and cater to your sense of
           style.
         </span>
-        <Button text="Shop Now" className="text-white bg-black" />
+        <Button text="Shop Now" className="text-white bg-black w-[210px]" />
         <ul class="flex mt-12 items-center">
-          <li class="border-r border-gray-400 pr-4">
+          <li class="border-r border-gray-400 pr-8">
             <h3>200+</h3>
             <span>International Brands</span>
           </li>
-          <li class="border-r border-gray-400 pr-4">
+          <li class="border-r border-gray-400 pr-8 pl-8">
             <h3>2,000+</h3>
             <span>High-Quality Products</span>
           </li>
-          <li>
+          <li class="pl-8">
             <h3>30,000+</h3>
             <span>Happy Customers</span>
           </li>

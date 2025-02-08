@@ -14,8 +14,8 @@ const Header = () => {
     setLoggedIn(false);
   };
   return (
-    <nav class="flex justify-center items-center h-24">
-      <ul class="flex items-center">
+    <nav class="flex items-center h-24 w-[85vw] mx-auto border-b border-gray-200">
+      <ul class="flex items-center justify-between w-full">
         <li>
           <Link to="/">
             <img src={logo} alt="Logo" class="mr-5" />

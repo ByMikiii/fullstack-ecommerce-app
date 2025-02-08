@@ -15,7 +15,7 @@ const ProductsSection = ({ categoryName, className }) => {
         <Product />
       </div>
       <p></p>
-      <Button text="View All" className="border border-gray-400" />
+      <Button text="View All" className="border border-gray-400 w-[218px]" />
     </div>
   );
 };

@@ -5,7 +5,11 @@ const Product = () => {
   return (
     <div class="h-80 mb-36">
       <div class="mb-4">
-        <img src={ShirtImage} alt="" class="rounded-[20px]" />
+        <img
+          src={ShirtImage}
+          alt=""
+          class="rounded-[20px] w-[295px] h-[298px]"
+        />
       </div>
       <h6 class="mb-1.5">VERTICAL STRIPED SHIRT</h6>
       <StarRating rating="4.24" value="true" className="mb-1.5" />
