@@ -1,6 +1,6 @@
 import React from "react";
 
-const SortDropdown = () => {
+const SortDropdown = ({ className, text }) => {
   const sortOptions = [
     { value: "popular", label: "Most Popular" },
     { value: "priceLowToHigh", label: "Price: Low to High" },
@@ -10,8 +10,8 @@ const SortDropdown = () => {
   ];
 
   return (
-    <div>
-      <span>Sort by: </span>
+    <div class={`rounded-[62px] cursor-pointer ${className}`}>
+      <span>{text}</span>
       <select id="sort">
         {sortOptions.map((sortOption, index) => (
           <option value={sortOption.value}>{sortOption.label}</option>

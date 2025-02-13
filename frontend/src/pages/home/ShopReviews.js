@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import ShopReview from "../../components/ShopReview";
+import Review from "../../components/Review";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -41,25 +41,25 @@ const ShopReviews = () => {
       <div class="carousel-mask">
         <Slider ref={sliderRef} {...settings}>
           <div class="mr-5">
-            <ShopReview />
+            <Review className={"w-[400px]"} />
           </div>
           <div class="mr-5">
-            <ShopReview />
+            <Review className={"w-[400px]"} />
           </div>
           <div class="mr-5">
-            <ShopReview />
+            <Review className={"w-[400px]"} />
           </div>
           <div class="mr-5">
-            <ShopReview />
+            <Review className={"w-[400px]"} />
           </div>
           <div class="mr-5">
-            <ShopReview />
+            <Review className={"w-[400px]"} />
           </div>
           <div class="mr-5">
-            <ShopReview />
+            <Review className={"w-[400px]"} />
           </div>
           <div class="mr-5">
-            <ShopReview />
+            <Review className={"w-[400px]"} />
           </div>
         </Slider>
       </div>

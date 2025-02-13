@@ -5,8 +5,8 @@ import DropdownArrow from "../assets/DropdownArrow.png";
 const BreadCrumb = () => {
   const location = useLocation();
 
-  // var pathArray = location.pathname.split("/").filter(Boolean);
-  var pathArray = ["products", "category", "electronics"];
+  var pathArray = location.pathname.split("/").filter(Boolean);
+  // var pathArray = ["products", "category", "electronics"];
   pathArray.unshift("home");
 
   function capitalize(word) {
@@ -22,7 +22,9 @@ const BreadCrumb = () => {
           ) : (
             <img src={DropdownArrow} alt="" class="w-4 h-4" />
           )}
-          <span key={index}>{capitalize(pathSegment)}</span>
+          <a href="/" key={index}>
+            {capitalize(pathSegment)}
+          </a>
         </>
       ))}
     </div>

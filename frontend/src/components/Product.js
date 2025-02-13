@@ -1,9 +1,11 @@
 import React from "react";
 import ShirtImage from "../assets/products/shirt.png";
 import StarRating from "./StarRating";
+import { Link } from "react-router-dom";
+
 const Product = () => {
   return (
-    <div class="h-80 mb-36">
+    <Link to="/shop/men/t-shirts" class="h-80 mb-36">
       <div class="mb-4">
         <img
           src={ShirtImage}
@@ -21,7 +23,7 @@ const Product = () => {
           -20%{" "}
         </small>
       </div>
-    </div>
+    </Link>
   );
 };
 

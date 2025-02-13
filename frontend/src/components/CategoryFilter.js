@@ -7,7 +7,7 @@ const CategoryFilter = ({ categoryName }) => {
   return (
     <div class="mb-3">
       <div
-        className="flex items-center justify-between"
+        className="flex items-center justify-between cursor-pointer"
         onClick={() => setIsOpened((x) => !x)}
       >
         <span class="text-gray-800">{categoryName}</span>

@@ -10,7 +10,7 @@ import BreadCrumb from "../../components/BreadCrumb";
 import Filters from "./Filters";
 import SortDropdown from "../../components/SortDropdown";
 
-const Store = () => {
+const ShopPage = () => {
   return (
     <>
       <SignBanner />
@@ -23,8 +23,10 @@ const Store = () => {
             <div class="flex items-center justify-between">
               <h4 class="mb-4">Casual</h4>
               <div class="flex">
-                <span class="mr-3">Showing 1-10 of 100 Products</span>
-                <SortDropdown />
+                <span class="mr-3 text-gray-400">
+                  Showing 1-10 of 100 Products
+                </span>
+                <SortDropdown text={"Sort by: "} />
               </div>
             </div>
             <div class="flex flex-wrap justify-between gap-5 border-b border-gray-200 pb-4">
@@ -59,4 +61,4 @@ const Store = () => {
   );
 };
 
-export default Store;
+export default ShopPage;
