@@ -8,29 +8,29 @@ import Button from "../../components/Button";
 const ProductReviews = () => {
   return (
     <div>
-      <div class="flex justify-between items-end mt-8">
-        <div class="flex items-center gap-2">
+      <div className="flex justify-between items-end mt-8">
+        <div className="flex items-center gap-2">
           <h5>All Reviews</h5>
-          <small class="mt-1.5">(452)</small>
+          <small className="mt-1.5">(452)</small>
         </div>
-        <div class="flex items-center gap-2">
-          <button class="w-12 h-12 bg-main px-3 rounded-full cursor-pointer">
+        <div className="flex items-center gap-2">
+          <button className="w-10 h-10 xl:w-12 xl:h-12 bg-main px-3 rounded-full cursor-pointer">
             <img src={Filters} alt="" />
           </button>
-          <SortDropdown className={"bg-main h-12 px-5 py-3"} />
-          <button class="bg-black text-white py-4 px-5 rounded-[62px] cursor-pointer">
+          <SortDropdown className={"hidden xl:block bg-main h-12 px-5 py-3"} />
+          <button className="bg-black text-white py-2 xl:py-4 px-5 rounded-[62px] cursor-pointer h-10 xl:h-12 text-sm">
             Write a Review
           </button>
         </div>
       </div>
-      <div class="flex flex-col items-center justify-center">
-        <div class="mt-8 flex flex-wrap items-center justify-between gap-5">
-          <Review showDate={true} className={"w-[49%]"} />
-          <Review showDate={true} className={"w-[49%]"} />
-          <Review showDate={true} className={"w-[49%]"} />
-          <Review showDate={true} className={"w-[49%]"} />
-          <Review showDate={true} className={"w-[49%]"} />
-          <Review showDate={true} className={"w-[49%]"} />
+      <div className="flex flex-col items-center justify-center">
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-5">
+          <Review showDate={true} className={"xl:w-[49%]"} />
+          <Review showDate={true} className={"xl:w-[49%]"} />
+          <Review showDate={true} className={"xl:w-[49%]"} />
+          <Review showDate={true} className={"xl:w-[49%]"} />
+          <Review showDate={true} className={"xl:w-[49%]"} />
+          <Review showDate={true} className={"xl:w-[49%]"} />
         </div>
         <Button
           text="Load More Reviews"

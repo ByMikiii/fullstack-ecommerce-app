@@ -18,14 +18,14 @@ const FilterName = ({ categoryName }) => {
   }, [isOpened]);
   return (
     <div
-      class="flex items-center justify-between pt-6 pb-5"
+      className="flex items-center justify-between pt-6 pb-5"
       onClick={() => setIsOpened((x) => !x)}
     >
       <h6>{categoryName}</h6>
       <img
         src={DropdownArrow}
         alt=""
-        class={
+        className={
           isOpened
             ? "rotate-90 transform transition-transform duration-300 ease-in-out"
             : "transform transition-transform duration-300 ease-in-out"

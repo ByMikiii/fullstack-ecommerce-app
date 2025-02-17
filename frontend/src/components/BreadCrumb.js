@@ -14,18 +14,18 @@ const BreadCrumb = () => {
   }
 
   return (
-    <div class="flex gap-2 items-center my-7">
+    <div className="flex items-center my-7">
       {pathArray.map((pathSegment, index) => (
-        <>
+        <div key={index} className="flex items-center">
           {index === 0 ? (
             ""
           ) : (
-            <img src={DropdownArrow} alt="" class="w-4 h-4" />
+            <img src={DropdownArrow} alt="" className="w-4 h-4 mx-1" />
           )}
-          <a href="/" key={index}>
+          <a href="/">
             {capitalize(pathSegment)}
           </a>
-        </>
+        </div>
       ))}
     </div>
   );

@@ -20,27 +20,24 @@ const ProductPage = () => {
         <ProductInfo />
 
         <div>
-          <div class="mt-14 flex border-b border-gray-200">
+          <div className="mt-14 flex border-b border-gray-200">
             <button
-              class={`w-1/3 py-6 cursor-pointer ${
-                activeCategory === 1 ? "border-b border-black" : ""
-              }`}
+              className={`w-1/3 py-6 cursor-pointer text-left xl:text-center ${activeCategory === 1 ? "border-b border-black" : ""
+                }`}
               onClick={() => setActiveCategory(1)}
             >
               Product Details
             </button>
             <button
-              class={`w-1/3 py-6 cursor-pointer ${
-                activeCategory === 2 ? "border-b border-black" : ""
-              }`}
+              className={`w-1/3 py-6 cursor-pointer ${activeCategory === 2 ? "border-b border-black" : ""
+                }`}
               onClick={() => setActiveCategory(2)}
             >
               Rating & Reviews
             </button>
             <button
-              class={`w-1/3 py-6 cursor-pointer ${
-                activeCategory === 3 ? "border-b border-black" : ""
-              }`}
+              className={`w-1/3 py-6 cursor-pointer text-right xl:text-center ${activeCategory === 3 ? "border-b border-black" : ""
+                }`}
               onClick={() => setActiveCategory(3)}
             >
               FAQs

@@ -11,21 +11,27 @@ import PayPal from "../assets/Paypal.png";
 import ApplePay from "../assets/ApplePay.png";
 import GooglePay from "../assets/GooglePay.png";
 
-const Footer = () => {
+const Footer = ({ className }) => {
   return (
-    <footer class="w-screen mt-48">
+    <footer className={`w-screen mt-48 ${className}`}>
       <Newsletter />
-      <div class="bg-main h-[500px] flex items-end">
-        <div class="w-[80%] mx-auto">
-          <ul class="w-full flex border-b border-gray-300 ">
-            <li class="w-64">
-              <img src={Logo} alt="" class="mb-6" />
-              <span class="font-light">
+      <div className="bg-main h-[846px] xl:h-[500px] flex flex-col justify-end xl:flex-row xl:items-end">
+        <div className="w-[91%] xl:w-[80%] mx-auto">
+          <ul className="w-full xl:flex border-b border-gray-300 ">
+            <li className="xl:w-64">
+              <img src={Logo} alt="" className="mb-6" />
+              <span className="font-light">
                 We have clothes that suits your style and which you’re proud to
                 wear. From women to men.
               </span>
+              <div className="flex gap-3 mt-5">
+                <img src={X} alt="" />
+                <img src={Facebook} alt="" />
+                <img src={Instagram} alt="" />
+                <img src={GitHub} alt="" />
+              </div>
             </li>
-            <div class="flex ml-auto mr-0">
+            <div className="grid grid-cols-2 xl:grid-cols-4">
               <li>
                 <ul>
                   <li>
@@ -105,16 +111,16 @@ const Footer = () => {
               </li>
             </div>
           </ul>
-          <div class="flex justify-between mb-14 mt-3">
-            <small class="ml-2 h-9 flex items-center">
-              © 2000-2025, All rights reserved
-            </small>
-            <div class="flex">
-              <img src={Visa} alt="" />
-              <img src={MasterCard} alt="" />
-              <img src={PayPal} alt="" />
-              <img src={ApplePay} alt="" />
-              <img src={GooglePay} alt="" />
+          <div className="xl:flex text-center justify-between mb-8 xl:mb-14 mt-3">
+            <span className="px-2 h-9">
+              Shop.co © 2000-2025, All rights reserved
+            </span>
+            <div className="flex py-6 xl:py-0 justify-center">
+              <img src={Visa} alt="" className="w-[52px] xl:w-[64px] h-auto" />
+              <img src={MasterCard} alt="" className="w-[52px] xl:w-[64px] h-auto" />
+              <img src={PayPal} alt="" className="w-[52px] xl:w-[64px] h-auto" />
+              <img src={ApplePay} alt="" className="w-[52px] xl:w-[64px] h-auto" />
+              <img src={GooglePay} alt="" className="w-[52px] xl:w-[64px] h-auto" />
             </div>
           </div>
         </div>

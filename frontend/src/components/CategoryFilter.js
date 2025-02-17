@@ -5,22 +5,21 @@ const CategoryFilter = ({ categoryName }) => {
   const [isOpened, setIsOpened] = useState(false);
 
   return (
-    <div class="mb-3">
+    <div className="mb-3">
       <div
         className="flex items-center justify-between cursor-pointer"
         onClick={() => setIsOpened((x) => !x)}
       >
-        <span class="text-gray-800">{categoryName}</span>
-        <img src={DropdownArrow} alt="" class={isOpened ? "rotate-90" : ""} />
+        <span className="text-gray-800">{categoryName}</span>
+        <img src={DropdownArrow} alt="" className={isOpened ? "rotate-90" : ""} />
       </div>
       <ul
-        class={`pl-1 py-1 flex flex-col text-gray-600 ${
-          isOpened ? "" : "hidden"
-        }`}
+        className={`pl-1 py-1 flex flex-col text-gray-600 ${isOpened ? "" : "hidden"
+          }`}
       >
-        <li class="my-1">Graphic Tees</li>
-        <li class="my-1">Plain</li>
-        <li class="my-1">Oversized</li>
+        <li className="my-1">Graphic Tees</li>
+        <li className="my-1">Plain</li>
+        <li className="my-1">Oversized</li>
       </ul>
     </div>
   );

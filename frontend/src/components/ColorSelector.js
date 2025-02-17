@@ -9,16 +9,16 @@ const ColorSelector = () => {
   ];
   const [selectedColor, setSelectedColor] = useState(colors[0].id);
   return (
-    <div class="flex gap-4 flex-wrap mt-3">
+    <div className="flex gap-4 flex-wrap mt-3">
       {colors.map((color) => (
         <button
           key={color.id}
-          class={`w-[37px] h-[37px] rounded-full cursor-pointer`}
+          className={`w-[37px] h-[37px] rounded-full cursor-pointer`}
           style={{ backgroundColor: color.hex }}
           onClick={() => setSelectedColor(color.id)}
         >
           {color.id === selectedColor && (
-            <img src={Check} alt="" class="mx-auto" />
+            <img src={Check} alt="" className="mx-auto" />
           )}
         </button>
       ))}

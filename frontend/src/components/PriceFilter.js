@@ -11,15 +11,15 @@ const PriceFilter = () => {
   };
 
   return (
-    <div class="border-b border-gray-200 pb-6">
+    <div className="border-b border-gray-200 pb-6">
       <FilterName categoryName={"Price"} />
-      <div id="PriceFilter" class="py-2">
+      <div id="PriceFilter" className="py-2">
         <RangeSlider
           defaultValue={[0, 100]}
           value={sliderValue}
           onInput={handleSliderChange}
         />
-        <div class="flex items-center justify-between pt-2">
+        <div className="flex items-center justify-between pt-2">
           <span>{sliderValue[0]}</span>
           <span>{sliderValue[1]}</span>
         </div>

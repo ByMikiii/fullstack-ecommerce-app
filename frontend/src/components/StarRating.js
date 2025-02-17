@@ -4,14 +4,14 @@ import HalfStar from "../assets/HalfStar.png";
 
 const StarRating = ({ className, rating, value }) => {
   return (
-    <div class={`flex items-center ${className}`}>
+    <div className={`flex items-center ${className}`}>
       {[...Array(Math.floor(rating))].map((_, index) => (
-        <img src={Star} alt="" class="w-4 h-4" />
+        <img src={Star} key={index} alt="" className="w-5 h-5" />
       ))}
       {rating - Math.floor(rating) >= 0.25 && (
-        <img src={HalfStar} alt="" class="w-[8px] h-4" />
+        <img src={HalfStar} alt="" className="w-[8px] h-4" />
       )}
-      {value && <small class="ml-4">{Math.round(rating * 10) / 10} / 5</small>}
+      {value && <small className="ml-4">{Math.round(rating * 10) / 10} / 5</small>}
     </div>
   );
 };

@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import ArrowLeft from "../../assets/ArrowLeft.png";
 import ArrowRight from "../../assets/ArrowRight.png";
 
-const ShopReviews = () => {
+const ShopReviews = ({ className }) => {
   const sliderRef = useRef(null);
 
   const settings = {
@@ -20,46 +20,46 @@ const ShopReviews = () => {
     touchThreshold: 1000,
   };
   return (
-    <div class="w-[97%] mx-auto">
-      <div class="h-14 flex items-center justify-between mb-9 px-20">
-        <h2>OUR HAPPY CUSTOMERS</h2>
-        <div class="flex">
+    <div className={`w-[97%] mx-auto ${className}`}>
+      <div className="h-14 flex items-center justify-between mb-9 px-4">
+        <h2 className="text-[32px] xl:text-[48px]">OUR HAPPY CUSTOMERS</h2>
+        <div className="flex">
           <button
-            class="cursor-pointer"
+            className="cursor-pointer"
             onClick={() => sliderRef.current?.slickPrev()}
           >
-            <img src={ArrowLeft} alt="" class="w-6 h-6 mx-2" />
+            <img src={ArrowLeft} alt="" className="w-6 h-6 mx-2" />
           </button>
           <button
-            class="cursor-pointer"
+            className="cursor-pointer"
             onClick={() => sliderRef.current?.slickNext()}
           >
-            <img src={ArrowRight} alt="" class="w-6 h-6 mx-2" />
+            <img src={ArrowRight} alt="" className="w-6 h-6 ml-2" />
           </button>
         </div>
       </div>
-      <div class="carousel-mask">
+      <div className="carousel-mask">
         <Slider ref={sliderRef} {...settings}>
-          <div class="mr-5">
-            <Review className={"w-[400px]"} />
+          <div className="mr-5">
+            <Review className={"xl:w-[400px]"} />
           </div>
-          <div class="mr-5">
-            <Review className={"w-[400px]"} />
+          <div className="mr-5">
+            <Review className={"xl:w-[400px]"} />
           </div>
-          <div class="mr-5">
-            <Review className={"w-[400px]"} />
+          <div className="mr-5">
+            <Review className={"xl:w-[400px]"} />
           </div>
-          <div class="mr-5">
-            <Review className={"w-[400px]"} />
+          <div className="mr-5">
+            <Review className={"xl:w-[400px]"} />
           </div>
-          <div class="mr-5">
-            <Review className={"w-[400px]"} />
+          <div className="mr-5">
+            <Review className={"xl:w-[400px]"} />
           </div>
-          <div class="mr-5">
-            <Review className={"w-[400px]"} />
+          <div className="mr-5">
+            <Review className={"xl:w-[400px]"} />
           </div>
-          <div class="mr-5">
-            <Review className={"w-[400px]"} />
+          <div className="mr-5">
+            <Review className={"xl:w-[400px]"} />
           </div>
         </Slider>
       </div>

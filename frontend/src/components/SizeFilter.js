@@ -15,9 +15,9 @@ const handleClick = (buttonId) => {
 
 const SizeFilter = () => {
   return (
-    <div class="pb-6 border-b border-gray-200">
+    <div className="pb-6 border-b border-gray-200">
       <FilterName categoryName={"Size"} />
-      <div id="SizeFilter" class="flex flex-wrap gap-3">
+      <div id="SizeFilter" className="flex flex-wrap gap-3">
         <Button
           text={"X-Small"}
           className={"bg-main text-gray-600 px-[20px] py-[10px]"}

@@ -6,6 +6,7 @@ import Login from "./features/auth/Login";
 import Register from "./features/auth/Register";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import ProductPage from "./pages/product/ProductPage.js";
+import CartPage from "./pages/cart/CartPage.js";
 
 export const AuthContext = createContext();
 
@@ -33,7 +34,8 @@ const App = () => {
           <Route path="/shop" element={<ShopPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="//shop/men/t-shirts" element={<ProductPage />} />
+          <Route path="/shop/men/t-shirts" element={<ProductPage />} />
+          <Route path="/cart" element={<CartPage />} />
         </Routes>
       </Router>
     </AuthContext.Provider>

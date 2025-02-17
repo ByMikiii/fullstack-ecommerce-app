@@ -4,7 +4,7 @@ import CategoryFilter from "./CategoryFilter";
 
 const StyleFilter = () => {
   return (
-    <div class="pb-6">
+    <div className="pb-6">
       <FilterName categoryName={"Dress Style"} />
       <div id="Dress StyleFilter">
         <CategoryFilter categoryName={"Casual"} />

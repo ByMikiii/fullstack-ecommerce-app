@@ -2,14 +2,14 @@ import React from "react";
 import "../tailwind.css";
 
 import Glass from "../assets/Glass.png";
-const Search = () => {
+const Search = ({ className }) => {
   return (
-    <div class="h-12 w-[577px] flex px-4 bg-main rounded-[62px]">
-      <img src={Glass} alt="" class="h-[24px] self-center" />
+    <div className={`h-12 w-[40%] flex px-4 bg-main rounded-[62px] ${className}`}>
+      <img src={Glass} alt="" className="h-[24px] self-center" />
       <input
         type="text"
         placeholder="Search for products..."
-        class="ml-4 w-96"
+        className="ml-4 w-96"
       />
     </div>
   );
