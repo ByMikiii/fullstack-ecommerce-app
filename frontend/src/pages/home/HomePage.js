@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import SignBanner from "../../components/SignBanner";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -8,11 +8,14 @@ import MainPhoto from "../../assets/MainPhoto.png";
 import ProductsSection from "./ProductsSection";
 import ShopReviews from "./ShopReviews";
 import DressStyle from "./DressStyle";
+import { AuthContext } from "../../App";
+import PopupMessage from "../../components/PopupMessage";
 
 const Home = () => {
+  const [loggedIn, setLoggedIn] = useContext(AuthContext);
+
   return (
     <div className="flex flex-col">
-      <SignBanner />
       <Header />
 
       <div
@@ -27,7 +30,7 @@ const Home = () => {
           designed to bring out your individuality and cater to your sense of
           style.
         </span>
-        <Button text="Shop Now" className="text-white bg-black w-full xl:w-[210px]" />
+        <Button text="Shop Now" className="text-white bg-black w-full xl:w-[210px] h-[52px]" />
         <ul className="max-w-[596px] mt-12 grid grid-cols-2 xl:grid-cols-3 text-center xl:text-left">
           <li className="border-r border-gray-400 px-4">
             <h3>200+</h3>

@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../App";
+import Button from "../../components/Button";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -44,7 +45,6 @@ const Register = () => {
   };
   return (
     <form onSubmit={handleRegister}>
-      <h1>Register</h1>
       <p>{error}</p>
       <input
         type="text"
@@ -70,7 +70,7 @@ const Register = () => {
         onChange={(e) => setPasswordConfirm(e.target.value)}
       ></input>
       <br />
-      <button type="submit">Submit</button>
+      <Button className={"bg-black text-white w-3/4"} type="submit" text="Register" />
     </form>
   );
 };

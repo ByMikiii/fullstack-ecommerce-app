@@ -13,7 +13,6 @@ const ProductPage = () => {
 
   return (
     <>
-      <SignBanner />
       <Header />
       <main>
         <BreadCrumb />

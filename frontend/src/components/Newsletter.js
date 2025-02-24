@@ -5,7 +5,7 @@ import EmailIcon from "../assets/EmailIcon.png";
 const Newsletter = () => {
   //xl:-translate-22 not working
   return (
-    <div className="flex flex-col xl:flex-row items-center justify-between px-6 xl:pr-9 xl:pl-6 py-9 ml-auto w-[80%] bg-black text-white mx-auto rounded-[20px] absolute -translate-36 xl:(-translate-22) left-1/2 -translate-x-1/2">
+    <div className="flex flex-col xl:flex-row items-center justify-between px-6 xl:pr-9 xl:pl-6 py-9 ml-auto w-[80%] bg-black text-white mx-auto rounded-[20px] relative top-36 xl:top-22">
       <h3 className="xl:w-[551px] font-[integral] leading-tight">
         STAY UP TO DATE ABOUT OUR LATEST OFFERS
       </h3>

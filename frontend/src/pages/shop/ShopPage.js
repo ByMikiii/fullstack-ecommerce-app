@@ -15,7 +15,6 @@ const ShopPage = () => {
   const [showFilters, setShowFilters] = useState(false);
   return (
     <>
-      <SignBanner />
       <Header />
       <main>
         <BreadCrumb />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-
+import Button from "../../components/Button";
 import { AuthContext } from "../../App";
 
 const user = {
@@ -52,7 +52,6 @@ const Login = () => {
     <h1>Vitaj</h1>
   ) : (
     <div>
-      <h1>Login</h1>
       <p>{error}</p>
       <form onSubmit={handleLogin}>
         <input
@@ -71,7 +70,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <br />
-        <button type="submit"> Submit</button>
+        <Button className={"bg-black text-white w-3/4"} type="submit" text="Login" />
       </form>
     </div>
   );

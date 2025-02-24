@@ -8,7 +8,6 @@ import Footer from "../../components/Footer";
 const CartPage = () => {
   return (
     <>
-      <SignBanner />
       <Header />
       <main>
         <BreadCrumb />

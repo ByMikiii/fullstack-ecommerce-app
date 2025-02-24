@@ -54,11 +54,6 @@ code {
     monospace;
 }
 
-h1 {
-  font-weight: 700;
-  font-size: 64px;
-}
-
 nav ul li {
   margin-left: 12px;
   margin-right: 12px;
@@ -78,6 +73,7 @@ footer div ul li {
 footer div ul li {
   margin-right: 18px;
 }
+
 
 h1,
 h2 {
