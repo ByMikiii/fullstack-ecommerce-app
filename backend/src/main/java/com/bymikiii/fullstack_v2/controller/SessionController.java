@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SessionController {
 
-  @GetMapping("/session-id")
-  public String getSessionId(HttpServletRequest request) {
-    return request.getSession().getId();
-  }
+    @GetMapping("/session-id")
+    public String getSessionId(HttpServletRequest request) {
+        return request.getSession().getId();
+    }
 }

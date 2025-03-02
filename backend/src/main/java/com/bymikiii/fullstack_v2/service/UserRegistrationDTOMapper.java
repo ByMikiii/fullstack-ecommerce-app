@@ -8,10 +8,10 @@ import java.util.function.Function;
 
 @Component
 public class UserRegistrationDTOMapper implements Function<User, UserRegistrationDTO> {
-  @Override
-  public UserRegistrationDTO apply(User user) {
-    return new UserRegistrationDTO(
-        user.getUsername(),
-        user.getPassword());
-  }
+    @Override
+    public UserRegistrationDTO apply(User user) {
+        return new UserRegistrationDTO(
+                user.getUsername(),
+                user.getPassword());
+    }
 }

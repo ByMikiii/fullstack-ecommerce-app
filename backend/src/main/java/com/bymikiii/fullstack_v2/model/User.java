@@ -7,71 +7,71 @@ import jakarta.persistence.Id;
 
 @Document
 public class User {
-  @Id
-  private ObjectId id;
+    @Id
+    private ObjectId id;
 
-  @Indexed(unique = true)
-  private String username;
-  private String password;
-  private String firstName;
-  private String lastName;
-  private String email;
-  private String phoneNumber;
+    @Indexed(unique = true)
+    private String username;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phoneNumber;
 
-  public ObjectId getId() {
-    return this.id;
-  }
+    public ObjectId getId() {
+        return this.id;
+    }
 
-  public void setId(ObjectId id) {
-    this.id = id;
-  }
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
 
-  public String getUsername() {
-    return this.username;
-  }
+    public String getUsername() {
+        return this.username;
+    }
 
-  public void setUsername(String username) {
-    this.username = username;
-  }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-  public String getPassword() {
-    return this.password;
-  }
+    public String getPassword() {
+        return this.password;
+    }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-  public String getFirstName() {
-    return this.firstName;
-  }
+    public String getFirstName() {
+        return this.firstName;
+    }
 
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-  public String getLastName() {
-    return this.lastName;
-  }
+    public String getLastName() {
+        return this.lastName;
+    }
 
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-  public String getEmail() {
-    return this.email;
-  }
+    public String getEmail() {
+        return this.email;
+    }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-  public String getPhoneNumber() {
-    return this.phoneNumber;
-  }
+    public String getPhoneNumber() {
+        return this.phoneNumber;
+    }
 
-  public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-  }
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
 }

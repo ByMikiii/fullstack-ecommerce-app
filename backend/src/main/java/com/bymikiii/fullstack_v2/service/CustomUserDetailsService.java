@@ -10,25 +10,25 @@ import com.bymikiii.fullstack_v2.repository.UserRepository;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-  private final UserRepository userRepository;
+    private final UserRepository userRepository;
 
-  public CustomUserDetailsService(UserRepository userRepository) {
-    this.userRepository = userRepository;
-  }
-
-  @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    User foundUser = userRepository.findByUsername(username);
-
-    if (foundUser == null) {
-      throw new UsernameNotFoundException(username + " not found");
+    public CustomUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    return org.springframework.security.core.userdetails.User
-        .withUsername(foundUser.getUsername())
-        .password(foundUser.getPassword())
-        .roles("User")
-        .build();
-  }
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User foundUser = userRepository.findByUsername(username);
+
+        if (foundUser == null) {
+            throw new UsernameNotFoundException(username + " not found");
+        }
+
+        return org.springframework.security.core.userdetails.User
+                .withUsername(foundUser.getUsername())
+                .password(foundUser.getPassword())
+                .roles("User")
+                .build();
+    }
 
 }

@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import HomePage from "./pages/home/HomePage.js";
 import ShopPage from "./pages/shop/ShopPage.js";
 import AuthPage from "./pages/auth/AuthPage.js";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProductPage from "./pages/product/ProductPage.js";
 import CartPage from "./pages/cart/CartPage.js";
 import ProfilePage from "./pages/profile/ProfilePage.js";
@@ -38,7 +38,7 @@ const App = () => {
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/login" element={<AuthPage key="login" login={true} />} />
             <Route path="/register" element={<AuthPage key="register" login={false} />} />
-            <Route path="/shop/men/t-shirts" element={<ProductPage />} />
+            <Route path="/shop/product/:slug" element={<ProductPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/profile" element={<ProfilePage />} />
           </Routes>

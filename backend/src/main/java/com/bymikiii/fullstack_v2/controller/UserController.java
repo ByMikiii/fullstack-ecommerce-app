@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bymikiii.fullstack_v2.exception.UserExistsException;
-import com.bymikiii.fullstack_v2.exception.UserNotFoundException;
+import com.bymikiii.fullstack_v2.exception.ItemExistsException;
+import com.bymikiii.fullstack_v2.exception.ItemNotFoundException;
 import com.bymikiii.fullstack_v2.model.*;
 import com.bymikiii.fullstack_v2.service.*;
 
@@ -26,57 +26,57 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
-  private final UserService userService;
-  private final UserDTOMapper userDTOMapper;
+    private final UserService userService;
+    private final UserDTOMapper userDTOMapper;
 
-  public UserController(UserService userService, UserDTOMapper userDTOMapper) {
-    this.userService = userService;
-    this.userDTOMapper = userDTOMapper;
-  }
-
-  @GetMapping("")
-  public List<User> getAllUsers() {
-    return this.userService.getAllUsers();
-  }
-
-  @GetMapping("/{username}")
-  public ResponseEntity<?> getUser(@PathVariable String username) {
-    try {
-      User foundUser = this.userService.findByUsername(username);
-      return ResponseEntity.ok(userDTOMapper.apply(foundUser));
-    } catch (UserNotFoundException e) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+    public UserController(UserService userService, UserDTOMapper userDTOMapper) {
+        this.userService = userService;
+        this.userDTOMapper = userDTOMapper;
     }
-  }
 
-  @PostMapping("")
-  public ResponseEntity<String> saveUser(@RequestBody User user) {
-    try {
-      System.out.println(user.getUsername());
-      return this.userService.saveUser(user);
-    } catch (UserExistsException e) {
-      return ResponseEntity.status(HttpStatus.CONFLICT).body("User already exists");
+    @GetMapping("")
+    public List<User> getAllUsers() {
+        return this.userService.getAllUsers();
     }
-  }
 
-  @PutMapping("/{username}")
-  public ResponseEntity<String> putMethodName(@PathVariable String username, @RequestBody User user) {
-    return userService.updateUser(username, user);
-  }
+    @GetMapping("/{username}")
+    public ResponseEntity<?> getUser(@PathVariable String username) {
+        try {
+            User foundUser = this.userService.findByUsername(username);
+            return ResponseEntity.ok(userDTOMapper.apply(foundUser));
+        } catch (ItemNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+    }
 
-  @DeleteMapping("/{username}")
-  public ResponseEntity<String> deleteUser(@PathVariable String username) {
-    return userService.deleteUser(username);
-  }
+    @PostMapping("")
+    public ResponseEntity<String> saveUser(@RequestBody User user) {
+        try {
+            System.out.println(user.getUsername());
+            return this.userService.saveUser(user);
+        } catch (ItemExistsException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("User already exists");
+        }
+    }
 
-  @PostMapping("/login")
-  public ResponseEntity<String> login(@RequestBody User user) {
-    return userService.verify(user);
-    // return "Success";
-  }
+    @PutMapping("/{username}")
+    public ResponseEntity<String> updateUser(@PathVariable String username, @RequestBody User user) {
+        return userService.updateUser(username, user);
+    }
 
-  @PostMapping("/register")
-  public User register(@RequestBody User user) {
-    return user;
-  }
+    @DeleteMapping("/{username}")
+    public ResponseEntity<String> deleteUser(@PathVariable String username) {
+        return userService.deleteUser(username);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody User user) {
+        return userService.verify(user);
+        // return "Success";
+    }
+
+    @PostMapping("/register")
+    public User register(@RequestBody User user) {
+        return user;
+    }
 }

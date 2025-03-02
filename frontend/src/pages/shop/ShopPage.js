@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import SignBanner from "../../components/SignBanner";
 import Footer from "../../components/Footer";
@@ -13,6 +13,25 @@ import FiltersImage from "../../assets/Filters.png";
 
 const ShopPage = () => {
   const [showFilters, setShowFilters] = useState(false);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/api/v1/products");
+        if (!response.ok) {
+          throw new Error("Failed to fetch products");
+        }
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
     <>
       <Header />
@@ -32,6 +51,10 @@ const ShopPage = () => {
               </div>
             </div>
             <div className="flex flex-wrap justify-between xl:gap-5 border-b border-gray-200 pb-12">
+              {products.map((product, index) => (
+                <Product className={"w-[172px] h-[172px]"} key={index} product={product} />
+              ))}
+              {/* <Product className={"w-[172px] h-[172px]"} />
               <Product className={"w-[172px] h-[172px]"} />
               <Product className={"w-[172px] h-[172px]"} />
               <Product className={"w-[172px] h-[172px]"} />
@@ -39,8 +62,7 @@ const ShopPage = () => {
               <Product className={"w-[172px] h-[172px]"} />
               <Product className={"w-[172px] h-[172px]"} />
               <Product className={"w-[172px] h-[172px]"} />
-              <Product className={"w-[172px] h-[172px]"} />
-              <Product className={"w-[172px] h-[172px]"} />
+              <Product className={"w-[172px] h-[172px]"} /> */}
             </div>
             <div className="px-1 flex items-center justify-between mt-5">
               <button className="border border-gray-200 px-[14px] py-[8px] rounded-[8px] font-[satoshi] text-xs flex items-center">

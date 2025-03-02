@@ -5,7 +5,7 @@ import SizeSelector from "../../components/SizeSelector";
 import QuantitySelector from "../../components/QuantitySelector";
 import Button from "../../components/Button";
 
-const ProductInfo = () => {
+const ProductInfo = ({ product }) => {
   const images = require.context(
     "../../assets/products/t-shirt",
     false,
@@ -14,6 +14,9 @@ const ProductInfo = () => {
   const tshirtImages = images.keys().map(images);
   const [currentImageSource, setCurrentImageSource] = useState(tshirtImages[0]);
 
+  if (!product) {
+    return <div>Loading...</div>
+  }
   return (
     <div className="xl:flex items-stretch gap-4 min-h-[530px]">
 
@@ -37,18 +40,19 @@ const ProductInfo = () => {
 
       <div className="xl:ml-10 xl:order-3">
         <div className="pb-6 border-b border-gray-200">
-          <h3 className="font-[integral] w-2/3">One Life Graphic T-shirt</h3>
+          <h3 className="font-[integral] w-2/3">{product.name}</h3>
           <StarRating rating={4.5} value={true} />
           <div className="flex items-center">
-            <h4>$260</h4>
-            <h4 className="text-gray-400 ml-2 line-through">$300</h4>
-            <small className="w-15 h-7 text-center p-1 rounded-[62px] bg-red-100 text-red-600 ml-2">
-              -20%
-            </small>
+            <h4>${product.sale ? product.salePrice : product.price}</h4>
+            <div className={`flex items-center justify-center ${product.sale === true ? "block" : "hidden"}`}>
+              <h4 className="text-gray-400 ml-2 line-through">{product.price}</h4>
+              <small className="w-15 h-7 text-center p-1 rounded-[62px] bg-red-100 text-red-600 ml-2">
+                {Math.round(100 - 100 / product.price * product.salePrice)}%
+              </small>
+            </div>
           </div>
           <span className="line-clamp-2">
-            This graphic t-shirt which is perfect for any occasion. Crafted from
-            a soft and breathable fabric, it offers superior comfort and style.
+            {product.descriptio}
           </span>
         </div>
         <div className="py-6 border-b border-gray-200">

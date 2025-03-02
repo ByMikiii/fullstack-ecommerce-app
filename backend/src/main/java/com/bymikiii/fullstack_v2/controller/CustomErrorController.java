@@ -8,8 +8,8 @@ import jakarta.servlet.http.HttpServletRequest;
 @Controller
 public class CustomErrorController implements ErrorController {
 
-  @GetMapping("/error")
-  public String handleError(HttpServletRequest request) {
-    return "redirect:/";
-  }
+    @GetMapping("/error")
+    public String handleError(HttpServletRequest request) {
+        return "redirect:/";
+    }
 }

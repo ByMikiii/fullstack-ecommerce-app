@@ -1,9 +1,3 @@
-
-/*
- * Author: ByMikiii
- * Created Date: Sunday December 29th 2024
- */
-
 package com.bymikiii.fullstack_v2;
 
 import java.beans.Customizer;
@@ -34,61 +28,61 @@ import com.bymikiii.fullstack_v2.service.CustomUserDetailsService;
 @Configuration
 public class SecurityConfig {
 
-  private final CustomUserDetailsService customUserDetailsService;
-  private final JwtFilter jwtFilter;
+    private final CustomUserDetailsService customUserDetailsService;
+    private final JwtFilter jwtFilter;
 
-  public SecurityConfig(CustomUserDetailsService customUserDetailsService, JwtFilter jwtFilter) {
-    this.customUserDetailsService = customUserDetailsService;
-    this.jwtFilter = jwtFilter;
-  }
+    public SecurityConfig(CustomUserDetailsService customUserDetailsService, JwtFilter jwtFilter) {
+        this.customUserDetailsService = customUserDetailsService;
+        this.jwtFilter = jwtFilter;
+    }
 
-  @Bean
-  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http.csrf(csrf -> csrf.disable())
-        .cors().configurationSource(corsConfigurationSource())
-        .and()
-        .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/", "/api/v1/users/login", "/api/v1/users").permitAll()
-            .anyRequest().authenticated())
-        // .formLogin().disable()
-        .httpBasic()
-        .and()
-        .sessionManagement(session -> session
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-    return http.build();
-  }
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable())
+                .cors().configurationSource(corsConfigurationSource())
+                .and()
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/", "/api/v1/users/login", "/api/v1/users", "/api/v1/products/**").permitAll()
+                        .anyRequest().authenticated())
+                // .formLogin().disable()
+                .httpBasic()
+                .and()
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        return http.build();
+    }
 
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder(12);
-  }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(12);
+    }
 
-  // @Bean
-  // public DaoAuthenticationProvider authenticationProvider() {
-  // DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-  // provider.setUserDetailsService(customUserDetailsService);
-  // provider.setPasswordEncoder(passwordEncoder());
-  // return provider;
-  // }
+    // @Bean
+    // public DaoAuthenticationProvider authenticationProvider() {
+    // DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+    // provider.setUserDetailsService(customUserDetailsService);
+    // provider.setPasswordEncoder(passwordEncoder());
+    // return provider;
+    // }
 
-  // Only for development
-  @Bean
-  public CorsConfigurationSource corsConfigurationSource() {
-    CorsConfiguration configuration = new CorsConfiguration();
-    configuration.addAllowedOrigin("http://localhost:3000");
-    configuration.addAllowedHeader("*");
-    configuration.addAllowedMethod("*");
-    configuration.setAllowCredentials(true);
+    // Only for development
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.addAllowedOrigin("http://localhost:3000");
+        configuration.addAllowedHeader("*");
+        configuration.addAllowedMethod("*");
+        configuration.setAllowCredentials(true);
 
-    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    source.registerCorsConfiguration("/**", configuration);
-    return source;
-  }
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 
-  @Bean
-  public AuthenticationManager authenticationManager(AuthenticationConfiguration conf) throws Exception {
-    return conf.getAuthenticationManager();
-  }
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration conf) throws Exception {
+        return conf.getAuthenticationManager();
+    }
 
 }

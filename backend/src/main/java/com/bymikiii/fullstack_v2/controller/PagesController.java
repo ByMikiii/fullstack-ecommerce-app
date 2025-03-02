@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequestMapping
 public class PagesController {
 
-  @GetMapping("/")
-  public String homePage() {
-    return "index";
-  }
+    @GetMapping("/")
+    public String homePage() {
+        return "index";
+    }
 
-  @GetMapping("/about")
-  public String aboutPage() {
-    return "aboutt";
-  }
+    @GetMapping("/about")
+    public String aboutPage() {
+        return "aboutt";
+    }
 
 }

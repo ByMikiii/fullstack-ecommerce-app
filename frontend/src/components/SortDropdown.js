@@ -19,7 +19,7 @@ const SortDropdown = ({ className, text }) => {
         <span>{text}</span>
         <select id="sort">
           {sortOptions.map((sortOption, index) => (
-            <option value={sortOption.value}>{sortOption.label}</option>
+            <option value={sortOption.value} key={index}>{sortOption.label}</option>
           ))}
         </select>
       </div>
