@@ -2,6 +2,7 @@ package com.bymikiii.fullstack_v2.service;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,15 +26,18 @@ public class UserService {
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final UserRegistrationDTOMapper userRegistrationDTOMapper;
+    private final CartRepository cartRepository;
 
     public UserService(UserRepository userRepository, AuthenticationManager authenticationManager,
             JwtService jwtService, PasswordEncoder passwordEncoder,
-            UserRegistrationDTOMapper userRegistrationDTOMapper) {
+            UserRegistrationDTOMapper userRegistrationDTOMapper,
+            CartRepository cartRepository) {
         this.userRepository = userRepository;
         this.authenticationManager = authenticationManager;
         this.jwtService = jwtService;
         this.passwordEncoder = passwordEncoder;
         this.userRegistrationDTOMapper = userRegistrationDTOMapper;
+        this.cartRepository = cartRepository;
     }
 
     public List<User> getAllUsers() {
@@ -45,10 +49,15 @@ public class UserService {
         if (foundUser != null) {
             throw new ItemExistsException("User " + user.getUsername() + " already exists");
         }
+        user.setId(new ObjectId());
         String passwordText = user.getPassword();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         user.setPassword(passwordText);
+
+        Cart cart = new Cart(user.getId());
+        this.cartRepository.save(cart);
+
         return verify(user);
     }
 

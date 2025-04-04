@@ -30,10 +30,6 @@ const ProfilePage = () => {
     fetchProtectedData();
   }, [])
 
-  useEffect(() => {
-    // console.log(user)
-  }, [user])
-
   if (!user) {
     return <div>Loading...</div>;
   }

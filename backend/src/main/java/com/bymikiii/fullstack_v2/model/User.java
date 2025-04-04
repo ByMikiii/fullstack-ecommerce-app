@@ -3,11 +3,16 @@ package com.bymikiii.fullstack_v2.model;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import jakarta.persistence.Id;
 
 @Document
 public class User {
     @Id
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
 
     @Indexed(unique = true)

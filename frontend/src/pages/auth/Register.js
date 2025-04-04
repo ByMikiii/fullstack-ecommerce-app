@@ -14,7 +14,6 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    console.log(username, " ", password, " ", passwordConfirm);
     if (password === passwordConfirm) {
       try {
         const response = await fetch("http://localhost:8080/api/v1/users", {
@@ -36,7 +35,7 @@ const Register = () => {
           setError(response.text());
         }
       } catch (e) {
-        console.log(e);
+        console.error(e);
         setError("Error");
       }
     } else {

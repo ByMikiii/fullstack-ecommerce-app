@@ -26,6 +26,7 @@ public class ProductService {
         if (foundProduct != null) {
             throw new ItemExistsException("Product " + product.getName() + " already exists");
         }
+        System.out.println(product.toString());
         productRepository.save(product);
         return ResponseEntity
                 .status(201)
@@ -48,7 +49,7 @@ public class ProductService {
             foundProduct.setName(updatedProduct.getName());
             foundProduct.setBrand(updatedProduct.getBrand());
             foundProduct.setCategory(updatedProduct.getCategory());
-            foundProduct.setDescriptio(updatedProduct.getDescriptio());
+            foundProduct.setDescription(updatedProduct.getDescription());
             return ResponseEntity.ok().body(foundProduct);
         }
     }

@@ -52,7 +52,6 @@ public class UserController {
     @PostMapping("")
     public ResponseEntity<String> saveUser(@RequestBody User user) {
         try {
-            System.out.println(user.getUsername());
             return this.userService.saveUser(user);
         } catch (ItemExistsException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("User already exists");
@@ -72,11 +71,6 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody User user) {
         return userService.verify(user);
-        // return "Success";
     }
 
-    @PostMapping("/register")
-    public User register(@RequestBody User user) {
-        return user;
-    }
 }

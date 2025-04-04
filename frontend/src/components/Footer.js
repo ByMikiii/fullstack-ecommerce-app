@@ -13,7 +13,7 @@ import GooglePay from "../assets/GooglePay.png";
 
 const Footer = ({ className }) => {
   return (
-    <footer className={`w-screen mt-48 ${className}`}>
+    <footer className={`w-screen mt-18 ${className}`}>
       <Newsletter />
       <div className="bg-main h-[846px] xl:h-[500px] flex flex-col justify-end xl:flex-row xl:items-end">
         <div className="w-[91%] xl:w-[80%] mx-auto">

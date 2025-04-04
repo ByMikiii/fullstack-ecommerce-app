@@ -10,10 +10,12 @@ import ProfilePage from "./pages/profile/ProfilePage.js";
 
 export const AuthContext = createContext();
 export const PopupContext = createContext();
+export const CartItemsCountContext = createContext();
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
+  const [cartItemCount, setCartItemCount] = useState("");
 
   const jwtCheck = () => {
     try {
@@ -32,17 +34,19 @@ const App = () => {
   return (
     <AuthContext.Provider value={[loggedIn, setLoggedIn]}>
       <PopupContext.Provider value={[popupMessage, setPopupMessage]}>
-        <Router>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/shop" element={<ShopPage />} />
-            <Route path="/login" element={<AuthPage key="login" login={true} />} />
-            <Route path="/register" element={<AuthPage key="register" login={false} />} />
-            <Route path="/shop/product/:slug" element={<ProductPage />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-          </Routes>
-        </Router>
+        <CartItemsCountContext.Provider value={[cartItemCount, setCartItemCount]}>
+          <Router>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/shop" element={<ShopPage />} />
+              <Route path="/login" element={<AuthPage key="login" login={true} />} />
+              <Route path="/register" element={<AuthPage key="register" login={false} />} />
+              <Route path="/shop/product/:slug" element={<ProductPage />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+            </Routes>
+          </Router>
+        </CartItemsCountContext.Provider>
       </PopupContext.Provider>
     </AuthContext.Provider>
   );

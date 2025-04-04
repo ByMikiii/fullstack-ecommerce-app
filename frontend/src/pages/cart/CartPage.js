@@ -4,26 +4,65 @@ import BreadCrumb from "../../components/BreadCrumb";
 import CartItem from "./CartItem";
 import CartSummary from "./CartSummary";
 import Footer from "../../components/Footer";
+import { useState, useEffect } from "react"
+
 
 const CartPage = () => {
+  const [cartItems, setCartItems] = useState([]);
+  const [cartDetails, setCartDetails] = useState({});
+
+  const removeItemFromCart = (itemToRemove) => {
+    setCartItems(cartItems.filter(item => JSON.stringify(item) !== JSON.stringify(itemToRemove)));
+  };
+
+  const fetchCartItems = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/api/v1/cart/67ca41831cd7df030211d80e");
+      if (!response.ok) {
+        throw new Error("Error fetching cart items!");
+      }
+      const result = await response.json();
+      setCartDetails(result);
+      setCartItems(result.items);
+    } catch (e) {
+
+    }
+  }
+
+  useEffect(() => {
+    fetchCartItems();
+  }, [])
+
+
+  if (!cartItems) {
+    return <div>Loading...</div>
+  }
+
   return (
     <>
       <Header />
       <main>
         <BreadCrumb />
         <h3 className="font-[integral] mb-6">YOUR CART</h3>
-        <div className="xl:flex  xl:justify-between">
+
+        {cartItems.length !== 0 ? <div className="xl:flex  xl:justify-between">
           <div className="xl:w-[57%] px-6 py-5 rounded-[20px] border border-gray-200">
-            <CartItem />
-            <div className="border-b border-gray-200 my-6"></div>
-            <CartItem />
-            <div className="border-b border-gray-200 my-6"></div>
-            <CartItem />
+            {(cartItems).map((cartItem, index) => (
+              <div key={index}>
+                <CartItem cartItem={cartItem} removeItem={removeItemFromCart} />
+                <div className="border-b border-gray-200 my-6"></div>
+              </div>
+            ))}
           </div>
           <div className="mt-5 xl:my-0 xl:w-[40%]">
-            <CartSummary />
+            <CartSummary cartDetails={cartDetails} />
           </div>
         </div>
+          :
+          <div className="mx-auto w-[90%] py-52 rounded-[20px] border border-gray-200">
+            <h1 className="flex items-center justify-center">YOUR CART IS EMPTY!</h1>
+          </div>}
+
       </main>
       <Footer />
     </>

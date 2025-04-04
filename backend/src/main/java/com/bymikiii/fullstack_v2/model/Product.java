@@ -1,8 +1,14 @@
 package com.bymikiii.fullstack_v2.model;
 
 import java.util.List;
+
+import lombok.Getter;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -12,27 +18,44 @@ import lombok.Data;
 @Document(collection = "products")
 public class Product {
     @Id
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
 
     private String name;
     private String slug;
     private String brand;
-    private String descriptio;
+    private String description;
     private double price;
     private double salePrice;
     private boolean sale;
     private int quantity;
     private String category;
+
     private List<SizeOption> sizes;
 
+    public Product() {
+    }
+
+    @Getter
     @Data
     public static class SizeOption {
         private String size;
         private int quantity;
+
+        public SizeOption() {
+
+        }
+
+        public void setSize(String size) {
+            this.size = size;
+        }
+
+        public void setQuantity(int quantity) {
+            this.quantity = quantity;
+        }
+
     }
 
-    @PrePersist
-    @PreUpdate
     public void generateSlug() {
         this.slug = this.getName().toLowerCase().replaceAll("\\s+", "-").replaceAll("[^a-z0-9-]", "");
     }
@@ -43,6 +66,10 @@ public class Product {
 
     public void setId(ObjectId id) {
         this.id = id;
+    }
+
+    public String getSlug() {
+        return this.slug;
     }
 
     public String getName() {
@@ -61,12 +88,12 @@ public class Product {
         this.brand = brand;
     }
 
-    public String getDescriptio() {
-        return this.descriptio;
+    public String getDescription() {
+        return this.description;
     }
 
-    public void setDescriptio(String descriptio) {
-        this.descriptio = descriptio;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public double getPrice() {
@@ -117,4 +144,20 @@ public class Product {
         this.sale = sale;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+                " id='" + getId() + "'" +
+                ", name='" + getName() + "'" +
+                ", slug='" + getSlug() + "'" +
+                ", brand='" + getBrand() + "'" +
+                ", description='" + getDescription() + "'" +
+                ", price='" + getPrice() + "'" +
+                ", salePrice='" + getSalePrice() + "'" +
+                ", sale='" + getSale() + "'" +
+                ", quantity='" + getQuantity() + "'" +
+                ", category='" + getCategory() + "'" +
+                ", sizes='" + getSizes() + "'" +
+                "}";
+    }
 }

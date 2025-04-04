@@ -5,12 +5,8 @@ import { Link } from "react-router-dom";
 
 const Product = ({ className, product }) => {
 
-  useEffect(() => {
-    console.log(product);
-  }, [product])
-
   return (
-    <Link to={`/shop/product/${product.slug}`} className="h-72 mt-6 xl:mt-0 xl:h-80 xl:mb-36">
+    <Link to={`/shop/product/${product.slug}`} className="h-72 mt-6 xl:mt-0 xl:h-80 xl:mb-36 hover:scale-102">
       <div className={`mb-[10px] xl:mb-4 xl:w-[295px] xl:h-[298px] ${className}`}>
         <img
           src={ShirtImage}
@@ -18,7 +14,7 @@ const Product = ({ className, product }) => {
           className={`rounded-[20px] xl:w-[295px] xl:h-[298px] ${className}`}
         />
       </div>
-      <h6 className="mb-1.5 truncate max-w-[172px] xl:max-w-[295px]">{product.name.toUpperCase()}</h6>
+      <h6 className="mb-1.5 truncate max-w-[172px] xl:max-w-[295px] hover:underline">{product.name.toUpperCase()}</h6>
       <StarRating rating="4.24" value="true" className="mb-1.5" />
       <div className="flex items-center">
         <h5>${product.sale ? product.salePrice : product.price}</h5>

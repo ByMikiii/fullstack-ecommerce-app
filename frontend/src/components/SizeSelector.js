@@ -1,24 +1,22 @@
-import React, { useState } from "react";
-const sizes = [
-  { id: 1, text: "Small" },
-  { id: 2, text: "Medium" },
-  { id: 3, text: "Large" },
-  { id: 4, text: "X-Large" },
-];
-const SizeSelector = () => {
-  const [activeSize, setActiveSize] = useState(sizes[0].id);
+import React, { useState, useEffect } from "react";
+const SizeSelector = ({ sizes, activeSize, setActiveSize }) => {
+
+  useEffect(() => {
+    setActiveSize(sizes[0].size)
+  }, [])
+
   return (
     <div className="flex gap-1.5 flex-wrap mt-3">
       {sizes.map((size) => (
-        <button
-          key={size.id}
-          className={`px-6 py-3 rounded-[62px] cursor-pointer ${activeSize === size.id
-              ? "bg-black text-white"
-              : "bg-main text-gray-600"
+        size.quantity && <button
+          key={size.size}
+          className={`px-6 py-3 rounded-[62px] cursor-pointer ${activeSize === size.size
+            ? "bg-black text-white"
+            : "bg-main text-gray-600"
             }`}
-          onClick={() => setActiveSize(size.id)}
+          onClick={() => setActiveSize(size.size)}
         >
-          {size.text}
+          {size.size}
         </button>
       ))}
     </div>
