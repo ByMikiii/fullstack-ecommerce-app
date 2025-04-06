@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 const Product = ({ className, product }) => {
 
   return (
-    <Link to={`/shop/product/${product.slug}`} className="h-72 mt-6 xl:mt-0 xl:h-80 xl:mb-36 hover:scale-102">
-      <div className={`mb-[10px] xl:mb-4 xl:w-[295px] xl:h-[298px] ${className}`}>
+    <Link to={`/shop/product/${product.slug}`} className="rounded-[20px] h-72 mt-6 xl:mt-0 xl:h-80 xl:mb-36">
+      <div className={`rounded-[20px] mb-[10px] xl:mb-4 xl:w-[295px] xl:h-[298px] overflow-hidden ${className}`}>
         <img
           src={ShirtImage}
           alt=""
-          className={`rounded-[20px] xl:w-[295px] xl:h-[298px] ${className}`}
+          className={`rounded-[20px] xl:w-[295px] xl:h-[298px] object-cover transition-transform duration-300 hover:scale-110 ${className}`}
         />
       </div>
       <h6 className="mb-1.5 truncate max-w-[172px] xl:max-w-[295px] hover:underline">{product.name.toUpperCase()}</h6>

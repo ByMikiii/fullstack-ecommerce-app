@@ -27,7 +27,7 @@ const ProductInfo = ({ product }) => {
         selectedSize: activeSize,
         selectedColor: null,
         quantity: quantity,
-        totalPrice: quantity * product.price
+        totalPrice: product.sale ? quantity * product.salePrice : quantity * product.price
       }
 
       const response = await fetch("http://localhost:8080/api/v1/cart/67ca41831cd7df030211d80e", {

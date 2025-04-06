@@ -14,6 +14,8 @@ import jakarta.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Data
 public class Cart {
@@ -100,17 +102,28 @@ public class Cart {
     }
 
     public void recalculateTotal() {
-        this.totalAmount = this.items.stream().mapToDouble(CartItem::getTotalPrice).sum();
+        this.totalAmount = this.items.stream()
+                .mapToDouble(item -> item.getProduct().getSale() ? item.getProduct().getSalePrice() * item.getQuantity()
+                        : item.getProduct().getPrice() * item.getQuantity())
+                .sum();
+        this.totalAmount = Math.round(this.totalAmount * 100.0) / 100.0;
         if (this.discount != null) {
             if (this.discount.isPercentage()) {
                 this.discountAmount = this.totalAmount / 100 * (100 - this.discount.getValue());
             } else {
                 this.discountAmount = this.totalAmount - this.discount.getValue();
             }
+        } else {
+            this.discountAmount = totalAmount;
         }
-        this.discountAmount = Math.round(this.discountAmount * 100.0) / 100.0;
-        this.totalAmount = Math.round(this.totalAmount * 100.0) / 100.0;
 
+        this.discountAmount = BigDecimal.valueOf(this.discountAmount)
+                .setScale(2, RoundingMode.HALF_UP)
+                .doubleValue();
+
+        this.totalAmount = BigDecimal.valueOf(this.totalAmount)
+                .setScale(2, RoundingMode.HALF_UP)
+                .doubleValue();
     }
 
     public ObjectId getId() {

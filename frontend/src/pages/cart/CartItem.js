@@ -4,7 +4,7 @@ import Trash from "../../assets/Trash.png";
 import { useState, useContext } from "react"
 import { PopupContext } from "../../App";
 
-const CartItem = ({ className, cartItem, removeItem }) => {
+const CartItem = ({ className, cartItem, removeItem, setCartDetails }) => {
   const [quantity, setQuantity] = useState(cartItem.quantity ?? 1);
   const [popupMessage, setPopupMessage] = useContext(PopupContext);
 
@@ -24,6 +24,8 @@ const CartItem = ({ className, cartItem, removeItem }) => {
       }
       else {
         removeItem(cartItem)
+        const result = await response.json();
+        setCartDetails(result);
         setPopupMessage("Item succesfully removed!");
       }
     } catch (e) {
@@ -58,8 +60,8 @@ const CartItem = ({ className, cartItem, removeItem }) => {
               <span className="text-gray-500 text-xs xl:text-sm">White</span>
             </div>
             <div className="flex items-center justify-between mt-3 xl:mt-4">
-              <h5 className="">${cartItem.product.price}</h5>
-              <QuantitySelector quantity={quantity} setQuantity={setQuantity} max={5} cartItem={cartItem} className="h-[31px] xl:h-11 w-[126px]" />
+              <h5 className="">${cartItem.product.sale ? cartItem.product.salePrice : cartItem.product.price}</h5>
+              <QuantitySelector quantity={quantity} setQuantity={setQuantity} max={5} cartItem={cartItem} setCartDetails={setCartDetails} className="h-[31px] xl:h-11 w-[126px]" />
 
             </div>
           </div>

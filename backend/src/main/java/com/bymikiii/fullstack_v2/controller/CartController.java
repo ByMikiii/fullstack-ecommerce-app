@@ -54,9 +54,9 @@ public class CartController {
         return this.cartService.removeItemsFromCart(userId, cartItem);
     }
 
-    @PutMapping("/{userId}/discount")
-    public ResponseEntity<Cart> applyDiscount(@PathVariable ObjectId userId, @RequestBody Discount discount) {
-        return this.cartService.applyDiscount(userId, discount);
+    @PutMapping("/{userId}/discount/{discountCode}")
+    public ResponseEntity<Cart> applyDiscount(@PathVariable ObjectId userId, @PathVariable String discountCode) {
+        return this.cartService.applyDiscount(userId, discountCode);
     }
 
     @DeleteMapping("/{userId}/discount")

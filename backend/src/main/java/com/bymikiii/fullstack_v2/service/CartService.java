@@ -3,6 +3,7 @@ package com.bymikiii.fullstack_v2.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
@@ -20,9 +21,11 @@ import com.bymikiii.fullstack_v2.repository.CartRepository;
 @Service
 public class CartService {
     private final CartRepository cartRepository;
+    private final DiscountService discountService;
 
-    public CartService(CartRepository cartRepository) {
+    public CartService(CartRepository cartRepository, DiscountService discountService) {
         this.cartRepository = cartRepository;
+        this.discountService = discountService;
     }
 
     public ResponseEntity<Integer> getCartItemCount(ObjectId userId) {
@@ -54,13 +57,13 @@ public class CartService {
             return ResponseEntity.badRequest().body(null);
         }
         List<CartItem> cartItems = cart.getItems();
+        System.out.println(newCartItem);
         boolean itemInCart = false;
         for (var cartItem : cartItems) {
             if (cartItem.getProduct().equals(newCartItem.getProduct())
                     & cartItem.getSelectedColor() == newCartItem.getSelectedColor()
                     & cartItem.getSelectedSize().equals(newCartItem.getSelectedSize())) {
                 cartItem.setQuantity(cartItem.getQuantity() + newCartItem.getQuantity());
-                System.out.println("item already in cart");
                 itemInCart = true;
                 break;
             }
@@ -68,7 +71,6 @@ public class CartService {
         if (!itemInCart) {
             cartItems.add(newCartItem);
         }
-        System.out.println("item added to cart");
         cart.recalculateTotal();
         this.cartRepository.save(cart);
         return ResponseEntity.ok().body(cart);
@@ -97,6 +99,12 @@ public class CartService {
                     & cartItemToEdit.getSelectedColor() == cartItem.getSelectedColor()) {
                 cartItemToEdit.setQuantity(cartItem.getQuantity());
                 cartItemToEdit.setSelectedColor(cartItem.getSelectedColor());
+                if (cartItemToEdit.getProduct().getSale()) {
+                    cartItemToEdit
+                            .setTotalPrice(cartItemToEdit.getQuantity() * cartItemToEdit.getProduct().getSalePrice());
+                } else {
+                    cartItemToEdit.setTotalPrice(cartItemToEdit.getQuantity() * cartItemToEdit.getProduct().getPrice());
+                }
                 found = true;
                 break;
             }
@@ -105,7 +113,7 @@ public class CartService {
         if (!found) {
             return ResponseEntity.notFound().build();
         }
-
+        cart.recalculateTotal();
         this.cartRepository.save(cart);
         return ResponseEntity.ok(cart);
     }
@@ -133,15 +141,21 @@ public class CartService {
         }
     }
 
-    public ResponseEntity<Cart> applyDiscount(ObjectId userId, Discount newDiscount) {
+    public ResponseEntity<Cart> applyDiscount(ObjectId userId, String discountCode) {
         Cart cart = this.cartRepository.findByUserId(userId);
-        if (cart == null | newDiscount == null) {
+        if (cart == null || discountCode.isEmpty()) {
             throw new ItemNotFoundException("Cart for this user does not exist!");
         }
-        cart.setDiscount(newDiscount);
-        cart.recalculateTotal();
-        this.cartRepository.save(cart);
-        return ResponseEntity.ok().body(cart);
+        Optional<Discount> optionalDiscount = this.discountService.getDiscountByCode(discountCode);
+        if (optionalDiscount.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(cart);
+        } else {
+            Discount foundDiscount = optionalDiscount.get();
+            cart.setDiscount(foundDiscount);
+            cart.recalculateTotal();
+            this.cartRepository.save(cart);
+            return ResponseEntity.ok().body(cart);
+        }
     }
 
     public ResponseEntity<Cart> removeDiscount(ObjectId userId) {

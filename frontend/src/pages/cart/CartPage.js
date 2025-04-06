@@ -49,13 +49,13 @@ const CartPage = () => {
           <div className="xl:w-[57%] px-6 py-5 rounded-[20px] border border-gray-200">
             {(cartItems).map((cartItem, index) => (
               <div key={index}>
-                <CartItem cartItem={cartItem} removeItem={removeItemFromCart} />
+                <CartItem cartItem={cartItem} removeItem={removeItemFromCart} setCartDetails={setCartDetails} />
                 <div className="border-b border-gray-200 my-6"></div>
               </div>
             ))}
           </div>
           <div className="mt-5 xl:my-0 xl:w-[40%]">
-            <CartSummary cartDetails={cartDetails} />
+            <CartSummary cartDetails={cartDetails} setCartDetails={setCartDetails} />
           </div>
         </div>
           :

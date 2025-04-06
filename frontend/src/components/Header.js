@@ -58,7 +58,7 @@ const Header = () => {
         <ul className="flex items-center justify-between w-full">
 
           <li className="flex items-center">
-            <div className="w-6 h-6 mr-4 xl:hidden" onClick={() => { setShowMobileNav((x) => !x) }} >
+            <div className="w-6 h-6 mr-4 md:hidden" onClick={() => { setShowMobileNav((x) => !x) }} >
               <img src={HamburgerMenu} alt="" className="w-6 h-6 cursor-pointer" />
             </div>
             <div>
@@ -67,23 +67,27 @@ const Header = () => {
               </Link>
             </div>
           </li>
-          <li className="hidden xl:flex">
-            <Link to="/shop">Shop</Link>
-          </li>
-          <li className="hidden xl:flex">
-            <Link to="/">On Sale</Link>
-          </li>
-          <li className="hidden xl:flex">
-            <Link to="/">New Arrivals</Link>
-          </li>
-          <li className="hidden xl:flex">
-            <Link to="/">Brands</Link>
-          </li>
+          <div className="flex items-left mr-auto ml-0">
+            <li className="hidden md:flex">
+              <Link to="/shop">Shop</Link>
+            </li>
+            <li className="hidden md:flex">
+              <Link to="/">On Sale</Link>
+            </li>
+            <li className="hidden md:flex">
+              <Link to="/">New Arrivals</Link>
+            </li>
+            <li className="hidden md:flex">
+              <Link to="/">Brands</Link>
+            </li>
+          </div>
           <Search className="hidden xl:flex" />
 
           <div className="flex justify-center">
             <li className="w-6 h-6 xl:hidden">
-              <img src={Glass} alt="" />
+              <button>
+                <img src={Glass} alt="" />
+              </button>
             </li>
             <Link to="/cart" className="relative">
               <img src={cart} alt="" className="w-6 h-6" />

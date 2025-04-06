@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Plus from "../assets/Plus.png";
 import Minus from "../assets/Minus.png";
+import { CartItemsCountContext } from "../App";
 
-const QuantitySelector = ({ max, className, quantity, setQuantity, cartItem }) => {
+const QuantitySelector = ({ max, className, quantity, setQuantity, cartItem, setCartDetails }) => {
+  const [cartItemCount, setCartItemCount] = useContext(CartItemsCountContext);
+
   function changeQuantity(difference) {
     let newQuantity = quantity + difference
     if (newQuantity > 0 && newQuantity <= 5) {
@@ -22,6 +25,16 @@ const QuantitySelector = ({ max, className, quantity, setQuantity, cartItem }) =
           if (!response.ok) {
             throw new Error("Error while changing quantity");
           }
+          setCartItemCount(prev => prev + difference);
+
+          const result = await response.json();
+          setCartDetails(result);
+          // const itemPrice = cartItem.product.sale ? cartItem.product.salePrice : cartItem.product.price;
+          // setCartDetails(prev => ({
+          //   ...prev,
+          //   totalAmount: prev.totalAmount + (difference * itemPrice),
+          //   discountAmount: prev.totalAmount + (difference * itemPrice)
+          // }))
 
         } catch (e) {
           console.error(e)
