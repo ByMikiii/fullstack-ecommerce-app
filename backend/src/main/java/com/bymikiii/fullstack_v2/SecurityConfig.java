@@ -43,7 +43,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/api/v1/users/login", "/api/v1/users", "/api/v1/products/**",
-                                "/api/v1/cart/**", "/api/v1/discount/**")
+                                "/api/v1/cart/**", "/api/v1/discount/**", "/api/v1/reviews/**")
                         .permitAll()
                         .anyRequest().authenticated())
                 // .formLogin().disable()
