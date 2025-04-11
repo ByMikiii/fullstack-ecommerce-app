@@ -11,7 +11,7 @@ import Profile from "../assets/Profile.png";
 import Glass from "../assets/Glass.png";
 import MobileNav from "./MobileNav";
 import SignBanner from "./SignBanner";
-import { PopupContext, CartItemsCountContext } from "../App";
+import { PopupContext, CartItemsCountContext, UserIdContext } from "../App";
 import PopupMessage from "./PopupMessage";
 
 const Header = () => {
@@ -19,8 +19,12 @@ const Header = () => {
   const [showMobileNav, setShowMobileNav] = useState(false);
   const [popupMessage, setPopupMessage] = useContext(PopupContext);
   const [cartItemCount, setCartItemCount] = useContext(CartItemsCountContext);
+  const [userId, setUserId] = useContext(UserIdContext);
 
   useEffect(() => {
+    if (!Cookies.get("userId") & Cookies.get("jwt")) {
+      handleLogout();
+    }
     const fetchCartCount = async () => {
       try {
         const response = await fetch("http://localhost:8080/api/v1/cart/count/67ca41831cd7df030211d80e",
@@ -47,6 +51,7 @@ const Header = () => {
 
   const handleLogout = () => {
     Cookies.set("jwt", "", { expires: 0 });
+    Cookies.set("userId", "", { expires: 0 });
     setLoggedIn(false);
     setPopupMessage("Successfully logged out!");
   };
@@ -98,7 +103,7 @@ const Header = () => {
                 <li className="w-6 h-6">
                   <Link to="/profile"><img src={Profile} alt="" /></Link>
                 </li>
-                {<li>
+                {<li className="hidden sm:block">
                   <button onClick={handleLogout} className="cursor-pointer">Logout</button>
                 </li>}
               </>

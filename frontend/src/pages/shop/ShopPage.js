@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
-import SignBanner from "../../components/SignBanner";
 import Footer from "../../components/Footer";
 import Product from "../../components/Product";
 import ArrowLeft from "../../assets/ArrowLeft.png";
@@ -8,7 +7,6 @@ import ArrowRight from "../../assets/ArrowRight.png";
 import PaginationButtons from "../../components/PaginationButtons";
 import BreadCrumb from "../../components/BreadCrumb";
 import Filters from "./Filters";
-import SortDropdown from "../../components/SortDropdown";
 import FiltersImage from "../../assets/Filters.png";
 
 const ShopPage = () => {
@@ -50,9 +48,9 @@ const ShopPage = () => {
                 {/* <SortDropdown text={"Sort by: "} /> */}
               </div>
             </div>
-            <div className="flex flex-wrap justify-between xl:gap-5 border-b border-gray-200 pb-12">
+            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-12 border-b border-gray-200 pb-12">
               {products.map((product, index) => (
-                <Product className={"w-[172px] h-[172px]"} key={index} product={product} />
+                <Product className={"max-w-[272px] max-h-[316px]"} key={index} product={product} />
               ))}
               {/* <Product className={"w-[172px] h-[172px]"} />
               <Product className={"w-[172px] h-[172px]"} />

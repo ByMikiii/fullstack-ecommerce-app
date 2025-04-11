@@ -6,7 +6,7 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import Button from "../../components/Button";
-import { AuthContext, PopupContext } from "../../App";
+import { AuthContext, UserIdContext, PopupContext } from "../../App";
 
 const AuthPage = ({ login }) => {
   const [loginState, setLoginState] = useState(login);
@@ -14,6 +14,7 @@ const AuthPage = ({ login }) => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [loggedIn, setLoggedIn] = useContext(AuthContext);
+  const [userId, setUserId] = useContext(UserIdContext);
   const [popupMessage, setPopupMessage] = useContext(PopupContext);
   const navigate = useNavigate();
 
@@ -58,7 +59,6 @@ const AuthPage = ({ login }) => {
         if (response.ok) {
           const jwtToken = await response.text();
           Cookies.set("jwt", jwtToken, { expires: 30 });
-          setLoggedIn(true);
           navigate("/");
           setPopupMessage("Succesfully registered!")
         } else {

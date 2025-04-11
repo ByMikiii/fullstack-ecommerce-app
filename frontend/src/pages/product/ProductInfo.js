@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import StarRating from "../../components/StarRating";
 import ColorSelector from "../../components/ColorSelector";
 import SizeSelector from "../../components/SizeSelector";

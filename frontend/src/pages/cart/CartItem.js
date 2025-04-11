@@ -2,15 +2,16 @@ import tshirt1 from "../../assets/products/t-shirt/t-shirt1.png";
 import QuantitySelector from "../../components/QuantitySelector";
 import Trash from "../../assets/Trash.png";
 import { useState, useContext } from "react"
-import { PopupContext } from "../../App";
+import { PopupContext, UserIdContext } from "../../App";
 
 const CartItem = ({ className, cartItem, removeItem, setCartDetails }) => {
   const [quantity, setQuantity] = useState(cartItem.quantity ?? 1);
   const [popupMessage, setPopupMessage] = useContext(PopupContext);
+  const [userId, setUserId] = useContext(UserIdContext);
 
   const removeFromCart = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/v1/cart/67ca41831cd7df030211d80e",
+      const response = await fetch("http://localhost:8080/api/v1/cart/" + userId,
         {
           method: 'DELETE',
           headers: {

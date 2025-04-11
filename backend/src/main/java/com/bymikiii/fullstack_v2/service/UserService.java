@@ -97,11 +97,12 @@ public class UserService {
 
     public ResponseEntity<String> verify(User user) {
         try {
+            User foundUser = findByUsername(user.getUsername());
             Authentication authentication = authenticationManager
                     .authenticate(
                             new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
             if (authentication.isAuthenticated()) {
-                return ResponseEntity.ok(jwtService.generateToken(user.getUsername()));
+                return ResponseEntity.ok(jwtService.generateToken(foundUser.getUsername(), foundUser.getId()));
             }
             return ResponseEntity.status(401).body("Not Authenticated");
         } catch (Exception e) {

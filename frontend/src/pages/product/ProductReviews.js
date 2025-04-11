@@ -1,6 +1,5 @@
 import React from "react";
 import Filters from "../../assets/Filters.png";
-import DropdownArrow from "../../assets/DropdownArrow.png";
 import SortDropdown from "../../components/SortDropdown";
 import Review from "../../components/Review";
 import Button from "../../components/Button";

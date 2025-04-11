@@ -4,12 +4,14 @@ import BreadCrumb from "../../components/BreadCrumb";
 import CartItem from "./CartItem";
 import CartSummary from "./CartSummary";
 import Footer from "../../components/Footer";
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
+import { UserIdContext } from "../../App.js";
 
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [cartDetails, setCartDetails] = useState({});
+  const [userId, setUserId] = useContext(UserIdContext);
 
   const removeItemFromCart = (itemToRemove) => {
     setCartItems(cartItems.filter(item => JSON.stringify(item) !== JSON.stringify(itemToRemove)));
@@ -17,7 +19,7 @@ const CartPage = () => {
 
   const fetchCartItems = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/v1/cart/67ca41831cd7df030211d80e");
+      const response = await fetch("http://localhost:8080/api/v1/cart/" + userId);
       if (!response.ok) {
         throw new Error("Error fetching cart items!");
       }
@@ -30,8 +32,9 @@ const CartPage = () => {
   }
 
   useEffect(() => {
+    if (!userId) return;
     fetchCartItems();
-  }, [])
+  }, [userId]);
 
 
   if (!cartItems) {

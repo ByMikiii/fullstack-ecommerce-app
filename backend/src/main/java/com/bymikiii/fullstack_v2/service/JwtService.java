@@ -5,6 +5,8 @@ import io.jsonwebtoken.security.Keys;
 import java.security.SecureRandom;
 import java.util.Date;
 import javax.crypto.SecretKey;
+
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,7 +20,7 @@ public class JwtService {
         return Keys.hmacShaKeyFor(secretKeyBytes);
     }
 
-    public String generateToken(String username) {
+    public String generateToken(String username, ObjectId userId) {
         Date Issued = new Date();
         // 7 days
         Date Expiration = new Date(Issued.getTime() + 1000 * 60 * 60 * 24 * 7);
@@ -26,6 +28,7 @@ public class JwtService {
                 .subject(username)
                 .issuedAt(Issued)
                 .expiration(Expiration)
+                .claim("userId", userId.toString())
                 .signWith(this.secretKey)
                 .compact();
     }

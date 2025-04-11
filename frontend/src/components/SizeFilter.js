@@ -4,7 +4,7 @@ import Button from "./Button";
 
 const handleClick = (buttonId) => {
   var clickedButton = document.getElementById(buttonId);
-  if (clickedButton.style.backgroundColor != "black") {
+  if (clickedButton.style.backgroundColor !== "black") {
     clickedButton.style.backgroundColor = "black";
     clickedButton.style.color = "white";
   } else {

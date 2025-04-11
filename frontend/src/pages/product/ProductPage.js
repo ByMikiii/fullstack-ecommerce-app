@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import SignBanner from "../../components/SignBanner";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import BreadCrumb from "../../components/BreadCrumb";
