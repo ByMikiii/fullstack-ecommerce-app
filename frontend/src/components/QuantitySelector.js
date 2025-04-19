@@ -8,7 +8,7 @@ const QuantitySelector = ({ max, className, quantity, setQuantity, cartItem, set
 
   function changeQuantity(difference) {
     let newQuantity = quantity + difference
-    if (newQuantity > 0 && newQuantity <= 5) {
+    if (newQuantity > 0 && newQuantity <= 100) {
       setQuantity(newQuantity);
       const updatedCartItem = { ...cartItem, quantity: newQuantity };
       const fetchQuantityChange = async () => {

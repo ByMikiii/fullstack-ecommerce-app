@@ -11,30 +11,41 @@ const DressStyle = ({ className }) => {
     >
       <h2 className="mb-16 text-center xl:text-left text-[32px] xl:text[48px] leading-tight">BROWSE BY DRESS STYLE</h2>
       <div className="flex gap-4 flex-wrap justify-center">
-        <div
-          className="h-72 min-w-[85%] xl:min-w-72 basis-1/4 rounded-[20px] bg-center bg-no-repeat bg-cover px-9 py-6"
-          style={{ backgroundImage: `url(${Casual})` }}
-        >
-          <h5>Casual</h5>
+        <div className="group h-72 min-w-[85%] xl:min-w-72 basis-1/4 rounded-[20px] overflow-hidden cursor-pointer">
+          <div
+            className="h-full w-full bg-center bg-no-repeat bg-cover px-9 py-6 transition-transform duration-500 group-hover:scale-110"
+            style={{ backgroundImage: `url(${Casual})` }}
+          >
+            <h5>Casual</h5>
+          </div>
         </div>
-        <div
-          className="h-72 min-w-[85%] xl:min-w-72 basis-1/2 rounded-[20px] bg-center bg-no-repeat bg-cover px-9 py-6"
-          style={{ backgroundImage: `url(${Formal})` }}
-        >
-          <h5>Formal</h5>
+
+        <div className="group h-72 min-w-[85%] xl:min-w-72 basis-1/2 rounded-[20px] overflow-hidden cursor-pointer">
+          <div
+            className="h-full w-full bg-center bg-no-repeat bg-cover px-9 py-6 transition-transform duration-500 group-hover:scale-110"
+            style={{ backgroundImage: `url(${Formal})` }}
+          >
+            <h5>Formal</h5>
+          </div>
         </div>
-        <div
-          className="h-72 min-w-[85%] xl:min-w-72 basis-1/2 rounded-[20px] bg-center bg-no-repeat bg-cover px-9 py-6"
-          style={{ backgroundImage: `url(${Party})` }}
-        >
-          <h5>Party</h5>
+        <div className="group h-72 min-w-[85%] xl:min-w-72 basis-1/2 rounded-[20px] overflow-hidden cursor-pointer">
+          <div
+            className="h-full w-full bg-center bg-no-repeat bg-cover px-9 py-6 transition-transform duration-500 group-hover:scale-110"
+            style={{ backgroundImage: `url(${Party})` }}
+          >
+            <h5>Party</h5>
+          </div>
         </div>
-        <div
-          className="h-72 min-w-[85%] xl:min-w-72 basis-1/4 rounded-[20px] bg-center bg-no-repeat bg-cover px-9 py-6"
-          style={{ backgroundImage: `url(${Gym})` }}
-        >
-          <h5>Gym</h5>
+
+        <div className="group h-72 min-w-[85%] xl:min-w-72 basis-1/4 rounded-[20px] overflow-hidden cursor-pointer">
+          <div
+            className="h-full w-full bg-center bg-no-repeat bg-cover px-9 py-6 transition-transform duration-500 group-hover:scale-110"
+            style={{ backgroundImage: `url(${Gym})` }}
+          >
+            <h5>Gym</h5>
+          </div>
         </div>
+
       </div>
     </div>
   );

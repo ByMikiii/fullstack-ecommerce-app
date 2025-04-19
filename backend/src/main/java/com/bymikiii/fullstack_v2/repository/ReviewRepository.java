@@ -7,9 +7,9 @@ import com.bymikiii.fullstack_v2.model.Review;
 import java.util.List;
 
 public interface ReviewRepository extends MongoRepository<Review, ObjectId> {
-    List<Review> findByCreatorId(ObjectId creatorId);
+    List<Review> findByCreatorUsername(String creatorUsername);
 
     List<Review> findByProductId(ObjectId productId);
 
-    Review findByProductIdAndCreatorId(ObjectId productId, ObjectId creatorId);
+    Review findByProductIdAndCreatorUsername(ObjectId productId, String creatorUsername);
 }

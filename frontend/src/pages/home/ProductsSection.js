@@ -24,15 +24,15 @@ const ProductsSection = ({ categoryName, className }) => {
     >
       <h2 className="text-center mb-10">{categoryName}</h2>
       <div className="w-full relative">
-        <div className="flex justify-center items-start flex-wrap xl:items-center xl:justify-center overflow-x-auto no-scrollbar gap-5 xl:max-w-[85vw]  p-4  xl:h-auto">
-          <Product className={"w-[198px] h-[200px]"} product={product} />
-          <Product className={"w-[198px] h-[200px]"} product={product} />
-          <Product className={"w-[198px] h-[200px]"} product={product} />
-          <Product className={"w-[198px] h-[200px]"} product={product} />
+        <div className="grid grid-cols-2 lg:grid-cols-4 justify-items-center justify-center content-center overflow-x-auto no-scrollbar p-4 h-auto md:w-2/3 xl:w-4/5 md:mx-auto">
+          <Product className={"w-[198px] h-[312px]"} product={product} />
+          <Product className={"w-[198px] h-[312px]"} product={product} />
+          <Product className={"w-[198px] h-[312px]"} product={product} />
+          <Product className={"w-[198px] h-[312px]"} product={product} />
         </div>
       </div>
 
-      <Button text="View All" className="border border-gray-400 w-[91%] xl:w-[218px]" />
+      <Button text="View All" className="border border-gray-400 w-[91%] sm:w-[218px]" />
     </div>
   );
 };

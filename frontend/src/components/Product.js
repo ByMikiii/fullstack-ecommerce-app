@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 const Product = ({ className, product }) => {
 
   return (
-    <Link to={`/shop/product/${product.slug}`} className={`rounded-[20px] mt-6 xl:mt-0 xl:h-80 xl:mb-36 ${className}`}>
-      <div className={`rounded-[20px] mb-[10px] xl:mb-4 overflow-hidden`}>
+    <Link to={`/shop/product/${product.slug}`} className={`rounded-[20px] mt-6 xl:mt-0 ${className}`}>
+      <div className={`rounded-[20px] mb-5 overflow-hidden`}>
         <img
           src={ShirtImage}
           alt=""

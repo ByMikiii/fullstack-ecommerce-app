@@ -19,28 +19,28 @@ const Home = () => {
       <Header />
 
       <div
-        className="h-[110vh] xl:h-[85vh] px-4 xl:px-24 pt-20 pb-20 flex-grow flex flex-col bg-no-repeat bg-fit bg-[-490px_bottom] xl:bg-cover xl:bg-center w-[100vw] bg-second bg-[length:960px]"
+        className="h-[110vh] sm:h-[85vh] px-4 sm:px-24 pt-20 pb-20 flex-grow flex flex-col bg-no-repeat bg-fit bg-[-490px_bottom] sm:bg-cover sm:bg-center w-[100vw] bg-second bg-[length:960px]"
         style={{ backgroundImage: `url(${MainPhoto})` }}
       >
-        <h1 className="w-[315px] xl:w-[580px] mb-6 leading-tight ">
+        <h1 className="w-[315px] sm:w-[580px] mb-6 leading-tight ">
           FIND CLOTHES THAT MATCHES YOUR STYLE
         </h1>
-        <span className="xl:w-[550px] mb-6">
+        <span className="sm:w-[550px] mb-6">
           Browse through our diverse range of meticulously crafted garments,
           designed to bring out your individuality and cater to your sense of
           style.
         </span>
-        <Button text="Shop Now" className="text-white bg-black w-full xl:w-[210px] h-[52px]" />
-        <ul className="max-w-[596px] mt-12 grid grid-cols-2 xl:grid-cols-3 text-center xl:text-left">
+        <Button text="Shop Now" className="text-white bg-black w-full sm:w-[210px] h-[52px]" />
+        <ul className="max-w-[596px] mt-12 grid grid-cols-2 sm:grid-cols-3 text-center sm:text-left">
           <li className="border-r border-gray-400 px-4">
             <h3>200+</h3>
             <span className="text-[12px] xl:text-[16px]">International Brands</span>
           </li>
-          <li className="xl:border-r border-gray-400 px-4">
+          <li className="sm:border-r border-gray-400 px-4">
             <h3>2,000+</h3>
             <span className="text-[12px] xl:text-[16px]">High-Quality Products</span>
           </li>
-          <li className="col-span-2 xl:col-span-1 px-4">
+          <li className="col-span-2 sm:col-span-1 px-4">
             <h3>30,000+</h3>
             <span className="text-[12px] xl:text-[16px]">Happy Customers</span>
           </li>

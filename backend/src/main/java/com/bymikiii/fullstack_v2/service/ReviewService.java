@@ -24,21 +24,21 @@ public class ReviewService {
         return ResponseEntity.ok(this.reviewRepository.findByProductId(productId));
     }
 
-    public ResponseEntity<List<Review>> getReviewsByCreator(ObjectId creatorId) {
-        return ResponseEntity.ok(this.reviewRepository.findByCreatorId(creatorId));
+    public ResponseEntity<List<Review>> getReviewsByCreator(String creatorUsername) {
+        return ResponseEntity.ok(this.reviewRepository.findByCreatorUsername(creatorUsername));
     }
 
-    public ResponseEntity<Review> getReviewsByProductAndCreator(ObjectId productId, ObjectId creatorId) {
-        return ResponseEntity.ok(this.reviewRepository.findByProductIdAndCreatorId(productId, creatorId));
+    public ResponseEntity<Review> getReviewsByProductAndCreator(ObjectId productId, String creatorUsername) {
+        return ResponseEntity.ok(this.reviewRepository.findByProductIdAndCreatorUsername(productId, creatorUsername));
     }
 
     public ResponseEntity<Review> saveReview(Review newReview) {
         if (newReview == null) {
             throw new ItemNotFoundException("Review is empty.");
         }
-        Review existingReview = this.reviewRepository.findByProductIdAndCreatorId(
+        Review existingReview = this.reviewRepository.findByProductIdAndCreatorUsername(
                 newReview.getProductId(),
-                newReview.getCreatorId());
+                newReview.getCreatorUsername());
 
         if (existingReview != null) {
             throw new ItemExistsException("Review already exists.");
@@ -47,10 +47,10 @@ public class ReviewService {
         return ResponseEntity.status(HttpStatus.CREATED).body(newReview);
     }
 
-    public ResponseEntity<Review> removeReview(ObjectId productId, ObjectId userId) {
-        Review existingReview = this.reviewRepository.findByProductIdAndCreatorId(
+    public ResponseEntity<Review> removeReview(ObjectId productId, String username) {
+        Review existingReview = this.reviewRepository.findByProductIdAndCreatorUsername(
                 productId,
-                userId);
+                username);
         if (existingReview == null) {
             throw new ItemNotFoundException("Review does not exist.");
         }

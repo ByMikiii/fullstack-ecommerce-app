@@ -26,9 +26,9 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    @GetMapping("/creator/{creatorId}")
-    public ResponseEntity<List<Review>> getReviewByCreator(@PathVariable ObjectId creatorId) {
-        return this.reviewService.getReviewsByCreator(creatorId);
+    @GetMapping("/creator/{creatorUsername}")
+    public ResponseEntity<List<Review>> getReviewByCreator(@PathVariable String creatorUsername) {
+        return this.reviewService.getReviewsByCreator(creatorUsername);
     }
 
     @GetMapping("/product/{productId}")
@@ -36,10 +36,10 @@ public class ReviewController {
         return this.reviewService.getReviewsByProduct(productId);
     }
 
-    @GetMapping("/product/{productId}/creator/{creatorId}")
+    @GetMapping("/product/{productId}/creator/{creatorUsername}")
     public ResponseEntity<Review> getReviewByProductAndCreator(@PathVariable ObjectId productId,
-            @PathVariable ObjectId creatorId) {
-        return this.reviewService.getReviewsByProductAndCreator(productId, creatorId);
+            @PathVariable String creatorUsername) {
+        return this.reviewService.getReviewsByProductAndCreator(productId, creatorUsername);
     }
 
     @PostMapping("/")
@@ -47,8 +47,9 @@ public class ReviewController {
         return this.reviewService.saveReview(review);
     }
 
-    @DeleteMapping("/product/{productId}/creator/{creatorId}")
-    public ResponseEntity<Review> deleteReview(@PathVariable ObjectId productId, @PathVariable ObjectId creatorId) {
-        return this.reviewService.removeReview(productId, creatorId);
+    @DeleteMapping("/product/{productId}/creator/{creatorUsername}")
+    public ResponseEntity<Review> deleteReview(@PathVariable ObjectId productId,
+            @PathVariable String creatorUsername) {
+        return this.reviewService.removeReview(productId, creatorUsername);
     }
 }

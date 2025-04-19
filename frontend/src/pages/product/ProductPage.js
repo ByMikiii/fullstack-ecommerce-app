@@ -63,7 +63,7 @@ const ProductPage = () => {
               FAQs
             </button>
           </div>
-          <ProductReviews />
+          <ProductReviews productId={product?.id} />
         </div>
 
         <ProductsSection

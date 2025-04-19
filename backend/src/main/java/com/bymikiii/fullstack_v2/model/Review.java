@@ -1,11 +1,12 @@
 package com.bymikiii.fullstack_v2.model;
 
-import java.sql.Date;
-
+import java.util.Date;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
@@ -17,11 +18,12 @@ public class Review {
     @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
 
+    @JsonProperty("createdAt")
     @CreatedDate
     private Date createdAt;
     private int rating;
     private String text;
-    private ObjectId creatorId;
+    private String creatorUsername;
     private ObjectId productId;
 
     public int getRating() {
@@ -40,12 +42,12 @@ public class Review {
         this.text = text;
     }
 
-    public ObjectId getCreatorId() {
-        return creatorId;
+    public String getCreatorUsername() {
+        return creatorUsername;
     }
 
-    public void setCreatorId(ObjectId creatorId) {
-        this.creatorId = creatorId;
+    public void setCreatorUsername(String creatorUsername) {
+        this.creatorUsername = creatorUsername;
     }
 
     public ObjectId getProductId() {

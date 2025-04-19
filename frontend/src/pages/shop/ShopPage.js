@@ -8,6 +8,7 @@ import PaginationButtons from "../../components/PaginationButtons";
 import BreadCrumb from "../../components/BreadCrumb";
 import Filters from "./Filters";
 import FiltersImage from "../../assets/Filters.png";
+import SortDropdown from "../../components/SortDropdown";
 
 const ShopPage = () => {
   const [showFilters, setShowFilters] = useState(false);
@@ -41,26 +42,17 @@ const ShopPage = () => {
             <div className="flex items-center justify-between">
               <h4 className="mb-4">Casual</h4>
               <div className="flex items-center">
-                <span className="mr-3 text-gray-400">
-                  Showing 1-10 of 100 Products
+                <span className="mr-3 text-gray-400 hidden md:block">
+                  Showing 1-10 of 100 Product
                 </span>
-                <img src={FiltersImage} alt="" onClick={() => setShowFilters((x) => !x)} />
-                {/* <SortDropdown text={"Sort by: "} /> */}
+                <SortDropdown text={"Sort by: "} />
+                <img className="xl:hidden" src={FiltersImage} alt="" onClick={() => setShowFilters((x) => !x)} />
               </div>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-12 border-b border-gray-200 pb-12">
               {products.map((product, index) => (
-                <Product className={"max-w-[272px] max-h-[316px]"} key={index} product={product} />
+                <Product className={"max-w-[272px] h-[364px]"} key={index} product={product} />
               ))}
-              {/* <Product className={"w-[172px] h-[172px]"} />
-              <Product className={"w-[172px] h-[172px]"} />
-              <Product className={"w-[172px] h-[172px]"} />
-              <Product className={"w-[172px] h-[172px]"} />
-              <Product className={"w-[172px] h-[172px]"} />
-              <Product className={"w-[172px] h-[172px]"} />
-              <Product className={"w-[172px] h-[172px]"} />
-              <Product className={"w-[172px] h-[172px]"} />
-              <Product className={"w-[172px] h-[172px]"} /> */}
             </div>
             <div className="px-1 flex items-center justify-between mt-5">
               <button className="border border-gray-200 px-[14px] py-[8px] rounded-[8px] font-[satoshi] text-xs flex items-center">

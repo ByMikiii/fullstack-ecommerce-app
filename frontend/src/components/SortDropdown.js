@@ -12,10 +12,7 @@ const SortDropdown = ({ className, text }) => {
 
   return (
     <>
-      <div className="w-8 h-8 bg-main rounded-full xl:hidden p-2">
-        <img src={Filters} alt="" className="w-4 h-4" />
-      </div>
-      <div className={`rounded-[62px] cursor-pointer hidden xl:block ${className}`}>
+      <div className={`rounded-[62px] cursor-pointer ${className}`}>
         <span>{text}</span>
         <select id="sort">
           {sortOptions.map((sortOption, index) => (

@@ -1,25 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import StarRating from "./StarRating";
 import Verified from "../assets/Verified.png";
 
-const ShopReview = ({ showDate, className }) => {
+const ShopReview = ({ showDate, className, review }) => {
+  const [formattedDate, setFormattedDate] = useState("");
+
+  useEffect(() => {
+    if (!review?.createdAt) return;
+    const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
+    };
+
+
+    setFormattedDate(formatDate(review.createdAt));
+  }, [review?.createdAt])
+
+
   return (
     <div
       className={`border border-gray-300 rounded-[20px] p-7 flex flex-col ${className}`}
     >
-      <StarRating rating="5" className="mb-2" />
+      <StarRating rating={review?.rating || 5} className="mb-2" />
       <div className="flex items-center mb-2">
-        <h6 className="text-xl font-bold"> Alex K. </h6>
+        <h6 className="text-xl font-bold"> {review?.creatorUsername || "Customer"} </h6>
         <img src={Verified} alt="" className="w-6 h-6 ml-2" />
       </div>
       <span className="text-gray-700">
-        "Finding clothes that align with my personal style used to be a
-        challenge until I discovered Shop.co. The range of options they offer is
-        truly remarkable, catering to a variety of tastes and occasions.”
+        {review?.text || ""}
       </span>
 
       {showDate && (
-        <span className="mt-6 text-gray-900">Posted on August 14, 2023</span>
+        <span className="mt-6 text-gray-900">Posted on {formattedDate}</span>
       )}
     </div>
   );
