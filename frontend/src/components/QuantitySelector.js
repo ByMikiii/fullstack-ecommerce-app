@@ -1,46 +1,64 @@
 import React, { useState, useContext } from "react";
 import Plus from "../assets/Plus.png";
 import Minus from "../assets/Minus.png";
-import { CartItemsCountContext } from "../App";
+import { CartItemsCountContext, UserIdContext } from "../App";
 
 const QuantitySelector = ({ max, className, quantity, setQuantity, cartItem, setCartDetails }) => {
   const [cartItemCount, setCartItemCount] = useContext(CartItemsCountContext);
+  const [userId, setUserId] = useContext(UserIdContext);
 
   function changeQuantity(difference) {
     let newQuantity = quantity + difference
     if (newQuantity > 0 && newQuantity <= 100) {
       setQuantity(newQuantity);
-      const updatedCartItem = { ...cartItem, quantity: newQuantity };
       const fetchQuantityChange = async () => {
         try {
-          const response = await fetch("http://localhost:8080/api/v1/cart/67ca41831cd7df030211d80e",
-            {
-              method: 'PUT',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(updatedCartItem),
+          if (userId) {
+            const updatedCartItem = { ...cartItem, quantity: newQuantity };
+            const response = await fetch(`http://localhost:8080/api/v1/cart/${userId}`,
+              {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedCartItem),
+              }
+            )
+            if (!response.ok) {
+              throw new Error("Error while changing quantity");
             }
-          )
-          if (!response.ok) {
-            throw new Error("Error while changing quantity");
+            setCartItemCount(prev => prev + difference);
+
+            const result = await response.json();
+            setCartDetails(result);
           }
-          setCartItemCount(prev => prev + difference);
-
-          const result = await response.json();
-          setCartDetails(result);
-          // const itemPrice = cartItem.product.sale ? cartItem.product.salePrice : cartItem.product.price;
-          // setCartDetails(prev => ({
-          //   ...prev,
-          //   totalAmount: prev.totalAmount + (difference * itemPrice),
-          //   discountAmount: prev.totalAmount + (difference * itemPrice)
-          // }))
-
+          else {
+            let cart = JSON.parse(localStorage.getItem('cart'));
+            let cartItems = cart ? cart.items : [];
+            let totalAmount = cart.totalAmount;
+            for (let item of cartItems) {
+              if (item.product.id === cartItem.product.id && item.selectedSize === cartItem.selectedSize) {
+                item.quantity = Math.max(0, item.quantity + difference);
+                totalAmount = Math.max(0, cart.totalAmount + difference * item.totalPrice); break;
+              }
+            }
+            const newCart = {
+              deliveryFee: 15,
+              discountAmount: totalAmount,
+              totalAmount: totalAmount,
+              items: cartItems
+            }
+            setCartDetails(newCart);
+            setCartItemCount(prev => prev + difference);
+            localStorage.setItem('cart', JSON.stringify(newCart));
+          }
         } catch (e) {
           console.error(e)
         }
       }
-      fetchQuantityChange();
+      if (cartItem) {
+        fetchQuantityChange();
+      }
     }
   }
   return (

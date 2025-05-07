@@ -19,20 +19,25 @@ const CartPage = () => {
 
   const fetchCartItems = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/v1/cart/" + userId);
-      if (!response.ok) {
-        throw new Error("Error fetching cart items!");
+      if (userId) {
+        const response = await fetch("http://localhost:8080/api/v1/cart/" + userId);
+        if (!response.ok) {
+          throw new Error("Error fetching cart items!");
+        }
+        const result = await response.json();
+        setCartDetails(result);
+        setCartItems(result.items);
+      } else {
+        const cart = localStorage.getItem('cart')
+        setCartDetails(JSON.parse(cart));
+        setCartItems(JSON.parse(cart).items);
       }
-      const result = await response.json();
-      setCartDetails(result);
-      setCartItems(result.items);
     } catch (e) {
 
     }
   }
 
   useEffect(() => {
-    if (!userId) return;
     fetchCartItems();
   }, [userId]);
 

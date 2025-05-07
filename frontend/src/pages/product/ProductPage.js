@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import BreadCrumb from "../../components/BreadCrumb";
-import ProductInfo from "./ProductInfo";
+import ProductInfo from "./ProductInfo.tsx";
 import ProductsSection from "../home/ProductsSection";
 import ProductReviews from "./ProductReviews";
 import { useParams } from 'react-router-dom';

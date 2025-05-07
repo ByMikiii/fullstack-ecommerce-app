@@ -11,24 +11,48 @@ const CartItem = ({ className, cartItem, removeItem, setCartDetails }) => {
 
   const removeFromCart = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/v1/cart/" + userId,
-        {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(cartItem),
+      if (userId) {
+        const response = await fetch("http://localhost:8080/api/v1/cart/" + userId,
+          {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(cartItem),
+          });
+        if (!response.ok) {
+          setPopupMessage("Error while removing items!");
+          throw new Error("Error while removing items.");
+        }
+        else {
+          removeItem(cartItem)
+          const result = await response.json();
+          setCartDetails(result);
+        }
+      } else {
+        const cart = localStorage.getItem('cart');
+        let parsedCart = JSON.parse(cart);
+        let cartItems = parsedCart.items;
+        cartItems = cartItems.filter(item => {
+          return !(cartItem.product.id === item.product.id && cartItem.selectedSize === item.selectedSize);
         });
-      if (!response.ok) {
-        setPopupMessage("Error while removing items!");
-        throw new Error("Error while removing items.");
-      }
-      else {
+
+        let totalPrice = 0;
+        cartItems.forEach(item => {
+          totalPrice += item.totalPrice * item.quantity;
+        });
+        const newCart = {
+          deliveryFee: 15,
+          discountAmount: totalPrice,
+          totalAmount: totalPrice,
+          items: cartItems
+        }
         removeItem(cartItem)
-        const result = await response.json();
-        setCartDetails(result);
-        setPopupMessage("Item succesfully removed!");
+        setCartDetails(newCart);
+        localStorage.setItem('cart', JSON.stringify(newCart));
       }
+
+      setPopupMessage("Item succesfully removed!");
     } catch (e) {
       console.error(e)
     }

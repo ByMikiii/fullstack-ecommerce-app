@@ -27,20 +27,31 @@ const Header = () => {
     }
     const fetchCartCount = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/v1/cart/count/67ca41831cd7df030211d80e",
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
+        if (userId) {
+          const response = await fetch(`http://localhost:8080/api/v1/cart/count/${userId}`,
+            {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              }
             }
+          )
+          if (!response.ok) {
+            throw new Error("Error while getting number of items in cart");
           }
-        )
-        if (!response.ok) {
-          throw new Error("Error while getting number of items in cart");
+          const result = await response.json()
+          setCartItemCount(result);
         }
-
-        const result = await response.json()
-        setCartItemCount(result);
+        // local storage
+        else {
+          const cart = localStorage.getItem('cart');
+          const cartItems = cart ? JSON.parse(cart).items : [];
+          let itemsCount = 0;
+          cartItems.forEach(item => {
+            itemsCount += item.quantity;
+          })
+          setCartItemCount(itemsCount);
+        }
       } catch (e) {
         console.error(e)
       }

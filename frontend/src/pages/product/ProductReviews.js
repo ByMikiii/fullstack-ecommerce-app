@@ -18,12 +18,7 @@ const ProductReviews = ({ productId }) => {
       setReviews(data)
     }
     fetchReviews();
-    console.log(productId)
   }, [productId])
-
-  useEffect(() => {
-    console.log(reviews)
-  }, [reviews])
 
 
   return (

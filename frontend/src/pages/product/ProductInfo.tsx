@@ -1,10 +1,19 @@
 import React, { useState, useContext } from "react";
-import StarRating from "../../components/StarRating";
-import ColorSelector from "../../components/ColorSelector";
-import SizeSelector from "../../components/SizeSelector";
-import QuantitySelector from "../../components/QuantitySelector";
-import Button from "../../components/Button";
-import { PopupContext, CartItemsCountContext } from "../../App";
+import StarRating from "../../components/StarRating.js";
+import ColorSelector from "../../components/ColorSelector.js";
+import SizeSelector from "../../components/SizeSelector.js";
+import QuantitySelector from "../../components/QuantitySelector.js";
+import Button from "../../components/Button.js";
+import { PopupContext, CartItemsCountContext } from "../../App.js";
+import { UserIdContext } from "../../App.js";
+
+type CartItem = {
+  product: any;
+  selectedSize: any;
+  selectedColor: string | null;
+  quantity: number;
+  totalPrice: number;
+};
 
 const ProductInfo = ({ product }) => {
   const images = require.context(
@@ -19,10 +28,11 @@ const ProductInfo = ({ product }) => {
   const [currentImageSource, setCurrentImageSource] = useState(tshirtImages[0]);
   const [popupMessage, setPopupMessage] = useContext(PopupContext);
   const [cartItemCount, setCartItemCount] = useContext(CartItemsCountContext)
+  const [userId, setUserId] = useContext(UserIdContext);
 
   const addToCart = async () => {
     try {
-      const cartItem = {
+      const cartItem:CartItem = {
         product: product,
         selectedSize: activeSize,
         selectedColor: null,
@@ -30,20 +40,63 @@ const ProductInfo = ({ product }) => {
         totalPrice: product.sale ? quantity * product.salePrice : quantity * product.price
       }
 
-      const response = await fetch("http://localhost:8080/api/v1/cart/67ca41831cd7df030211d80e", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(cartItem),
-      });
-      if (!response.ok) {
-        throw new Error("Error while adding product to Cart");
+      if (userId) {
+        const response = await fetch(`http://localhost:8080/api/v1/cart/${userId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(cartItem),
+        });
+        if (!response.ok) {
+          throw new Error("Error while adding product to Cart");
+        }
+        const result = await response.json();
+        setCartItemCount(prev => {
+          return prev + quantity;
+        })
+      } else {
+        const cart = localStorage.getItem('cart');
+
+        // update local cart
+        if (cart) {
+          let parsedCart = JSON.parse(cart);
+          let cartItems = parsedCart.items;
+          let changed = false;
+          let totalPrice = 0;
+          cartItems.forEach(item => {
+            if(item.product.id === cartItem.product.id && item.selectedSize === cartItem.selectedSize){
+              item.quantity += quantity;
+              changed = true;
+            }
+            totalPrice += item.totalPrice * item.quantity;
+          });
+          if(changed === false){
+            cartItems.push(cartItem);
+            totalPrice += cartItem.totalPrice * cartItem.quantity;
+          }
+
+          const newCart = {
+            deliveryFee: 15,
+            discountAmount: totalPrice,
+            totalAmount: totalPrice,
+            items: cartItems
+          }
+          localStorage.setItem('cart', JSON.stringify(newCart));
+        }
+        // create new local cart
+        else {
+          let items:CartItem[] = [];
+          items.push(cartItem);
+          const newCart = {
+            deliveryFee: 15,
+            discountAmount: cartItem.totalPrice,
+            totalAmount: cartItem.totalPrice,
+            items: items
+          }
+          localStorage.setItem('cart', JSON.stringify(newCart));
+        }
       }
-      const result = await response.json();
-      setCartItemCount(prev => {
-        return prev + quantity;
-      })
       setPopupMessage("Item successfully added to the card!")
     } catch (e) {
       setPopupMessage("Error while adding product to the cart!")
