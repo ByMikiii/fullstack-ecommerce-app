@@ -1,9 +1,9 @@
-import React, { useState, useContext } from "react";
-import StarRating from "../../components/StarRating.js";
-import ColorSelector from "../../components/ColorSelector.js";
-import SizeSelector from "../../components/SizeSelector.js";
-import QuantitySelector from "../../components/QuantitySelector.js";
-import Button from "../../components/Button.js";
+import { useState, useContext } from "react";
+import StarRating from "../../components/StarRating";
+import ColorSelector from "../../components/ColorSelector";
+import SizeSelector from "../../components/SizeSelector";
+import QuantitySelector from "../../components/QuantitySelector";
+import Button from "../../components/Button";
 import { PopupContext, CartItemsCountContext } from "../../App.js";
 import { UserIdContext } from "../../App.js";
 
@@ -21,18 +21,22 @@ const ProductInfo = ({ product }) => {
     false,
     /\.(png|jpe?g|svg)$/
   );
-  const [color, setColor] = useState(null);
+  const tshirtImages: string[] = images.keys().map((key: string) => {
+    const image = images(key);
+    return image.default || image;
+  });
+    const [currentImageSource, setCurrentImageSource] = useState<string>(tshirtImages[0]);
+
+  // const [color, setColor] = useState(null);
   const [activeSize, setActiveSize] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const tshirtImages = images.keys().map(images);
-  const [currentImageSource, setCurrentImageSource] = useState(tshirtImages[0]);
-  const [popupMessage, setPopupMessage] = useContext(PopupContext);
-  const [cartItemCount, setCartItemCount] = useContext(CartItemsCountContext)
-  const [userId, setUserId] = useContext(UserIdContext);
+  const [, setPopupMessage] = useContext(PopupContext);
+  const [, setCartItemCount] = useContext(CartItemsCountContext)
+  const userId = useContext(UserIdContext);
 
   const addToCart = async () => {
     try {
-      const cartItem:CartItem = {
+      const cartItem: CartItem = {
         product: product,
         selectedSize: activeSize,
         selectedColor: null,
@@ -51,7 +55,7 @@ const ProductInfo = ({ product }) => {
         if (!response.ok) {
           throw new Error("Error while adding product to Cart");
         }
-        const result = await response.json();
+
         setCartItemCount(prev => {
           return prev + quantity;
         })
@@ -65,13 +69,13 @@ const ProductInfo = ({ product }) => {
           let changed = false;
           let totalPrice = 0;
           cartItems.forEach(item => {
-            if(item.product.id === cartItem.product.id && item.selectedSize === cartItem.selectedSize){
+            if (item.product.id === cartItem.product.id && item.selectedSize === cartItem.selectedSize) {
               item.quantity += quantity;
               changed = true;
             }
             totalPrice += item.totalPrice * item.quantity;
           });
-          if(changed === false){
+          if (changed === false) {
             cartItems.push(cartItem);
             totalPrice += cartItem.totalPrice * cartItem.quantity;
           }
@@ -86,7 +90,7 @@ const ProductInfo = ({ product }) => {
         }
         // create new local cart
         else {
-          let items:CartItem[] = [];
+          let items: CartItem[] = [];
           items.push(cartItem);
           const newCart = {
             deliveryFee: 15,
@@ -131,13 +135,13 @@ const ProductInfo = ({ product }) => {
       <div className="xl:ml-10 xl:order-3">
         <div className="pb-6 border-b border-gray-200">
           <h3 className="font-[integral] w-2/3">{product.name}</h3>
-          <StarRating rating={4.5} value={true} />
+          <StarRating rating={4.5} value={true} className="" />
           <div className="flex items-center">
             <h4>${product.sale ? product.salePrice : product.price}</h4>
             <div className={`flex items-center justify-center ${product.sale === true ? "block" : "hidden"}`}>
               <h4 className="text-gray-400 ml-2 line-through">{product.price}</h4>
               <small className="w-15 h-7 text-center p-1 rounded-[62px] bg-red-100 text-red-600 ml-2">
-                {Math.round(100 - 100 / product.price * product.salePrice)}%
+                -{Math.round(100 - 100 / product.price * product.salePrice)}%
               </small>
             </div>
           </div>
@@ -147,7 +151,7 @@ const ProductInfo = ({ product }) => {
         </div>
         <div className="py-6 border-b border-gray-200">
           <span className="mb-2">Select Colors</span>
-          <ColorSelector color={color} setColor={setColor} />
+          <ColorSelector /*color={color} setColor={setColor}*/ />
         </div>
         <div className="py-6 border-b border-gray-200">
           <span className="">Choose Size</span>
@@ -155,8 +159,9 @@ const ProductInfo = ({ product }) => {
         </div>
 
         <div className="flex justify-between gap-5 mt-6">
-          <QuantitySelector quantity={quantity} setQuantity={setQuantity} max={5} className={"w-[170px]"} />
+          <QuantitySelector quantity={quantity} setQuantity={setQuantity} max={5} className={"w-[170px]"} cartItem={null} setCartDetails={null} />
           <Button
+            type="button"
             text={"Add to Cart"}
             className={"bg-black text-white flex-1 gap-5 cursor-pointer"}
             onClick={addToCart}

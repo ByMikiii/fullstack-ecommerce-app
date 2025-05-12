@@ -1,12 +1,12 @@
 import React, { createContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import HomePage from "./pages/home/HomePage.js";
-import ShopPage from "./pages/shop/ShopPage.js";
-import AuthPage from "./pages/auth/AuthPage.js";
+import HomePage from "./pages/home/HomePage";
+import ShopPage from "./pages/shop/ShopPage";
+import AuthPage from "./pages/auth/AuthPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ProductPage from "./pages/product/ProductPage.js";
-import CartPage from "./pages/cart/CartPage.js";
-import ProfilePage from "./pages/profile/ProfilePage.js";
+import ProductPage from "./pages/product/ProductPage";
+import CartPage from "./pages/cart/CartPage";
+import ProfilePage from "./pages/profile/ProfilePage";
 import { jwtDecode } from 'jwt-decode';
 
 export const AuthContext = createContext();
